@@ -1,5 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import routes from './routes.jsx';
+import Mobile from './styles/Mobile.js';
 
 function App() {
   const elements = routes.map((item, index) => (
@@ -9,7 +10,7 @@ function App() {
     <>
     <Router>
         <Routes>
-            <Route path="/">
+            <Route path="/" element={<Mobile/>}>
               {elements}
             </Route>
         </Routes>
