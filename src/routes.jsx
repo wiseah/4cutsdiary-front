@@ -3,6 +3,7 @@ import Intro from "./pages/Intro";
 import Join from "./pages/Join";
 import Main from "./pages/Main";
 import Sitemap from "./pages/Sitemap";
+import Test from "./pages/Test";
 
 
 const routes = [
@@ -29,6 +30,11 @@ const routes = [
         path: '/add',
         element: <Add />,
         name: '메인페이지_추가하기 페이지'
+    },
+    {
+        path: '/test',
+        element: <Test />,
+        name: '테스트 페이지'
     },
 ]
 
