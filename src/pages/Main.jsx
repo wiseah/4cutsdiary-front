@@ -5,6 +5,7 @@ function Main() {
     <div>
       메인 페이지입니다.
       규린 추가
+      윤해 추가
     </div>
   )
 }
