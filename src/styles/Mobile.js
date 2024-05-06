@@ -21,7 +21,7 @@ const Content=styled.div`
     box-shadow:0px 0px 32px #0000002f;
     background-color: #ffffff;
 
-    padding-bottom: 260px; //footer높이만큼 패딩 줘야함. 그래야 내용 다보임.
+    padding-bottom: 160px; //footer높이만큼 패딩 줘야함. 그래야 내용 다보임.
 `;
 
 // 01.home Header
@@ -83,7 +83,7 @@ const Footer = styled.div`
     max-width: 390px;
     min-width: 360px;
     width: 100%;
-    height: 260px;
+    height: 160px;
     bottom: 0;
     left: 50%;
     
