@@ -21,7 +21,7 @@ const Content=styled.div`
     box-shadow:0px 0px 32px #0000002f;
     background-color: #ffffff;
 
-    padding-bottom: 160px; //footer높이만큼 패딩 줘야함. 그래야 내용 다보임.
+    padding-bottom: 152px; //footer높이만큼 패딩 줘야함. 그래야 내용 다보임. (근데 160으로 하니까 흰부분 생겨서 152px로 고정함.)
 `;
 
 // 01.home Header
@@ -115,7 +115,7 @@ font-weight: 500;
 `;
 const Follower = styled.div`
 color: #ffffff;
-font-size: 14px;
+font-size: 12px;
 font-weight: 500;
 `;
 
