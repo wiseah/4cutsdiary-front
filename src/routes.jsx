@@ -1,7 +1,9 @@
 import Add from "./pages/Add";
+import FindUser from "./pages/FindUser";
 import Intro from "./pages/Intro";
 import Join from "./pages/Join";
 import Main from "./pages/Main";
+import Register from "./pages/Register";
 import Sitemap from "./pages/Sitemap";
 import Test from "./pages/Test";
 
@@ -35,6 +37,16 @@ const routes = [
         path: '/test',
         element: <Test />,
         name: '테스트 페이지'
+    },
+    {
+        path: '/register',
+        element: <Register />,
+        name: '회원가입 페이지'
+    },
+    {
+        path: '/finduser',
+        element: <FindUser />,
+        name: '아이디/비밀번호 찾기 페이지'
     },
 ]
 
