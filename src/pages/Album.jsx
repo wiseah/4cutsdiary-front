@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import AlbumImg from '../images/AlbumImg.png'
+import AlbumImg from '../images/DiaryImg.png'
 import AddImg from '../images/AddImg.png'
 
 
