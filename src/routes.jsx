@@ -1,7 +1,10 @@
 import Add from "./pages/Add";
+import Album from "./pages/Album";
 import Intro from "./pages/Intro";
 import Join from "./pages/Join";
 import Main from "./pages/Main";
+import Maindiary from "./pages/Maindiary";
+import MaindiaryTest from "./pages/MaindiaryTest";
 import Sitemap from "./pages/Sitemap";
 import Test from "./pages/Test";
 
@@ -36,6 +39,22 @@ const routes = [
         element: <Test />,
         name: '테스트 페이지'
     },
+    {
+        path: '/maindiary',
+        element: <Maindiary />,
+        name: '메인페이지_일기작성'
+    },
+    {
+        path: '/maindiarytest',
+        element : <MaindiaryTest />,
+        name: '메인페이지_일기작성_테스트'
+    },
+    {
+        path: '/album',
+        element: <Album/>,
+        name: '앨범내부'
+    },
+    
 ]
 
 export default routes;
