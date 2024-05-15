@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import AlbumImg from '../images/AlbumImg.png'
 import DiaryImg from '../images/DiaryImg.png'
 import AddImg from '../images/AddButton.png'
+import Modal from "./Add";
 
 const Background = styled.div`
   background: linear-gradient(
@@ -65,18 +66,21 @@ const DiaryName = styled.div`
   font-size: 14px;
   font-weight: 600px;`
 
-const AddIcon = styled.img`
-  margin-top: 5px;
-  margin-bottom: 5px;
+const AddButton = styled.img`
+  margin-top: 10px;
+  margin-bottom: 15px;
 `
 const AddText = styled.div`
 font-size: 14px;
 font-weight: 600px;`
 
-
-
 function Main() {
-  return (
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => setShowModal(true);
+  const closeModal = ()=> setShowModal(false);
+
+    return (
     <Background>
       <TitleContainer>
         <BoxTitle>
@@ -119,10 +123,10 @@ function Main() {
         </DataCell>
 
         <DataCell>
-          <AddIcon src={AddImg}></AddIcon>
+          <AddButton src={AddImg} onClick={openModal} />
           <AddText>추가하기</AddText>
+          <Modal isOpen={showModal} closeModal={closeModal} />
         </DataCell>
-
         
       </MainContainer>
     </Background>
