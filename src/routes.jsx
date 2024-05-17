@@ -56,12 +56,6 @@ const routes = [
         element: <Album/>,
         name: '앨범내부'
     },
-    
-    {
-        path: '/register',
-        element: <Register />,
-        name: '회원가입 페이지'
-    },
     {
         path: '/finduser',
         element: <FindUser />,

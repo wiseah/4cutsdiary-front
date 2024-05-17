@@ -1,4 +1,4 @@
-import { Link,Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import classNames from 'classnames';
 import { BsCameraFill } from "react-icons/bs";
@@ -38,6 +38,7 @@ const TitleText = styled.div`
     display: flex;
     align-items: center;
     padding-left: 14px;
+    cursor: pointer;
 `;
 const Title = styled.div`
     color: #F48B9F;
@@ -133,12 +134,14 @@ const TeamText = styled.div`
 `;
 
 const Mobile=()=>{
+    const navigate=useNavigate();
+
     return(
         <>
             <Container>
                 <Content>
                     <Header>
-                        <TitleText>
+                        <TitleText onClick={() => navigate('/')}>
                             <BsCameraFill size="28px" style={{ marginRight: '10px', color: '#F48B9F'}}/>
                             <Title>네컷일기</Title>
                         </TitleText>
