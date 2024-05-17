@@ -19,9 +19,9 @@ const Input = styled.input`
     border: none;
     outline: none;
     background-color: transparent;
-
+    color: #D62C4D;
     &::placeholder {
-        color: #968E88;
+        color: rgba(214, 44, 77, 0.4);
     }
 `;
 
