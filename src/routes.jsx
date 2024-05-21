@@ -8,6 +8,8 @@ import MaindiaryTest from "./pages/MaindiaryTest";
 import Register from "./pages/Register";
 import Sitemap from "./pages/Sitemap";
 import Test from "./pages/Test";
+import Reader from "./pages/Reader";
+import QRCodeScanner from "./pages/Qrcode";
 
 
 const routes = [
@@ -56,6 +58,16 @@ const routes = [
         path: '/finduser',
         element: <FindUser />,
         name: '아이디/비밀번호 찾기 페이지'
+    },
+    {
+        path: '/scan',
+        element: <QRCodeScanner />,
+        name: 'qr스캔'
+    },
+    {
+        path: '/scan2',
+        element: <Reader />,
+        name: 'qr스캔2'
     },
 ]
 
