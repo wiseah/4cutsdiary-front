@@ -95,6 +95,7 @@ const LoginButton = styled.button`
   font-weight: 700;
   margin-top: 16px;
   border: none;
+  cursor: pointer;
 `
 const KakaoLoginButton = styled.img`
   width: 290px;
@@ -119,65 +120,79 @@ const Find = styled.div`
 `
 
 function Intro() {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
-  const [errorText, setErrorText] = useState('비밀번호를 잘못 입력하셨습니다.');
-
+  const [errorText, setErrorText] = useState('');
   const [fieldHidden, setFieldHidden] = useState(true);
+
+  const handleLoginClick = () => {
+    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+    const user = existingUsers.find(user => user.id === id && user.password === password);
+
+    if (user) {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      navigate('/test');
+      // navigate('/main');
+    } else {
+      setErrorText('아이디 또는 비밀번호가 잘못되었습니다.');
+      alert('로그인에 실패했습니다.');
+    }
+  };
+
   return (
     <Background>
-        <Text>
-          네컷일기로 추억을 저장하세요
-        </Text>
-        <SubText>
+      <Text>
+        네컷일기로 추억을 저장하세요
+      </Text>
+      <SubText>
         이미지에 그 순간을 기록하여
         <br />
         나의 이쁜 다이어리를 쉽게 만들고 공유해봐요!
-        </SubText>
-        <IntroImage1 src='/images/IntroImg1.png'/>
-        <Text>
-          작성한 일기는 친구와 바로 공유 가능해요
-        </Text>
-        <IntroImage2 src='/images/IntroImg2.png'></IntroImage2>
-        <Text>
-          간단한 로그인으로 지금 바로 시작해보세요!
-        </Text>
-        <LoginContainer>
-          <LoginImage>
-            <Form>
-              <TextInput
-                  value={id}
-                  onInput={(event) => setId(event.target.value)}
-                  placeholder="아이디"
-              />
-              <Line />
-              <TextInput
-                  value={password}
-                  onInput={(event) => {
-                      setPassword(event.target.value);
-                      setErrorText('');
-                  }}
-                  placeholder="비밀번호"
-                  additionalItem={
-                      <PasswordEyeButton
-                          value={fieldHidden}
-                          onClick={() => setFieldHidden((state) => !state)}
-                      />
-                  }
-                  textHidden={fieldHidden}
-              />
-            </Form>
-            <InputErrorText text={errorText} />
-          </LoginImage>
-          <LoginButton>
-            로그인
-          </LoginButton>
+      </SubText>
+      <IntroImage1 src='/images/IntroImg1.png' />
+      <Text>
+        작성한 일기는 친구와 바로 공유 가능해요
+      </Text>
+      <IntroImage2 src='/images/IntroImg2.png'></IntroImage2>
+      <Text>
+        간단한 로그인으로 지금 바로 시작해보세요!
+      </Text>
+      <LoginContainer>
+        <LoginImage>
+          <Form>
+            <TextInput
+              value={id}
+              onInput={(event) => setId(event.target.value)}
+              placeholder="아이디"
+            />
+            <Line />
+            <TextInput
+              value={password}
+              onInput={(event) => {
+                setPassword(event.target.value);
+                setErrorText('');
+              }}
+              placeholder="비밀번호"
+              additionalItem={
+                <PasswordEyeButton
+                  value={fieldHidden}
+                  onClick={() => setFieldHidden((state) => !state)}
+                />
+              }
+              textHidden={fieldHidden}
+            />
+          </Form>
+          <InputErrorText text={errorText} />
+        </LoginImage>
+        <LoginButton onClick={handleLoginClick}>
+          로그인
+        </LoginButton>
           <KakaoLoginButton src='/images/KakaoLogo.png'>
           </KakaoLoginButton>
           <RegisterText>
-            <Join onClick={() => navigate('/register')}>회원가입</Join>
+            <Join onClick={() => navigate('/join')}>회원가입</Join>
             <Find onClick={() => navigate('/finduser')}>아이디/비밀번호 찾기</Find>
           </RegisterText>
         </LoginContainer>
