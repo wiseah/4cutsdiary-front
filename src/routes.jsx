@@ -1,11 +1,16 @@
-import Add from "./pages/Add";
+import Add from "./components/Add";  //윤해 수정 : add.jsx파일을 components파일로 옮김
 import Album from "./pages/Album";
+
+import FindUser from "./pages/FindUser";
 import Intro from "./pages/Intro";
 import Join from "./pages/Join";
 import Main from "./pages/Main";
 import MaindiaryTest from "./pages/MaindiaryTest";
+import Register from "./pages/Register";
 import Sitemap from "./pages/Sitemap";
 import Test from "./pages/Test";
+import Reader from "./pages/Reader";
+import QRCodeScanner from "./pages/Qrcode";
 
 
 const routes = [
@@ -51,7 +56,21 @@ const routes = [
         name: '앨범내부'
     },
 
-    
+    {
+        path: '/finduser',
+        element: <FindUser />,
+        name: '아이디/비밀번호 찾기 페이지'
+    },
+    {
+        path: '/scan',
+        element: <QRCodeScanner />,
+        name: 'qr스캔'
+    },
+    {
+        path: '/scan2',
+        element: <Reader />,
+        name: 'qr스캔2'
+    },
 ]
 
 export default routes;

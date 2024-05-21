@@ -1,9 +1,10 @@
-import React from 'react'
+import {useState} from 'react'
 import styled from 'styled-components';
-import IntroImg1 from '../images/IntroImg1.png'
-import IntroImg2 from '../images/IntroImg2.png'
-import LoginBoxImg from '../images/LoginBoxImg.png'
-import KakaoLogo from '../images/KakaoLogo.png'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+
+import TextInput from '../components/TextInput';
+import PasswordEyeButton from '../components/PasswordEyeButton.jsx';
+import InputErrorText from '../components/InputErrorText.jsx';
 
 const Background = styled.div`
   background: linear-gradient(
@@ -12,7 +13,7 @@ const Background = styled.div`
     #FCE6F1 45%,
     #FF9CAF 100%
   );
-  height: 1034px;  // 변경된 부분
+  height: 1134px;  // 변경된 부분
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,23 +47,44 @@ const IntroImage2 = styled.img`
 const LoginContainer = styled.div`
   background-color: #ffffff;
   width:326px;
-  height:236px;
+  height:280px;
   margin-top: 25px;
-  border-radius: 10px 10px 0 0;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
 
 `
-const LoginBoxImage = styled.img`
-  margin-top: 5px;
-
+const LoginImage = styled.div`
+  margin-top: 10px;
+  width: 310px;
+  height:114px;
+  background-image: url('/images/LoginBoxImg.png');
+  background-size: cover;
+  background-position: center;
 `
-// const Id = styled.
+const Form = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 290px;
+    height: 104px;
+    margin-top: 6px;
+    margin-left: 30px;
+    /* gap: 13px; */
+`;
+
+const Line = styled.div`
+  width:253px;
+  height:3px;
+
+  border-radius:15%;
+  background-color: #ffffff;
+`
 
 const LoginButton = styled.button`
   width: 290px;
-  height: 32px;
+  height: 43.5px;
   border-radius: 5px;
   background-color: #F48B9F;
   color: #ffffff;
@@ -71,68 +93,108 @@ const LoginButton = styled.button`
   justify-content: center;
   font-size: 17px;
   font-weight: 700;
-  margin-top: 12px;
+  margin-top: 16px;
   border: none;
+  cursor: pointer;
 `
-const KakaoLoginButton = styled.button`
+const KakaoLoginButton = styled.img`
   width: 290px;
-  height: 32px;
-  border-radius: 5px;
-  background-color: #FFEB00;
-  display: flex;
-  align-items: center;
-  /* justify-content: center; */
-  font-size: 17px;
-  font-weight: 700;
-  margin-top: 12px;
-  border: none;
+  margin-top: 10px;
 `
-const LoginText = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 50px;
+const RegisterText = styled.div`
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top: 14px;
+  width: 280px;
 `
-const KakaoLogoImg = styled.img`
-  
+const Join = styled.div`
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+`
+const Find = styled.div`
+  font-size: 14px;
+  font-weight: 300;
+  cursor: pointer;
 `
 
 function Intro() {
+  const navigate = useNavigate();
+
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorText, setErrorText] = useState('');
+  const [fieldHidden, setFieldHidden] = useState(true);
+
+  const handleLoginClick = () => {
+    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+    const user = existingUsers.find(user => user.id === id && user.password === password);
+
+    if (user) {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      navigate('/test');
+      // navigate('/main');
+    } else {
+      setErrorText('아이디 또는 비밀번호가 잘못되었습니다.');
+      alert('로그인에 실패했습니다.');
+    }
+  };
+
   return (
     <Background>
-        <Text>
-          네컷일기로 추억을 저장하세요
-        </Text>
-        <SubText>
+      <Text>
+        네컷일기로 추억을 저장하세요
+      </Text>
+      <SubText>
         이미지에 그 순간을 기록하여
         <br />
         나의 이쁜 다이어리를 쉽게 만들고 공유해봐요!
-        </SubText>
-        <IntroImage1 src={IntroImg1}/>
-        <Text>
-          작성한 일기는 친구와 바로 공유 가능해요
-        </Text>
-        <IntroImage2 src={IntroImg2}></IntroImage2>
-        <Text>
-          간단한 로그인으로 지금 바로 시작해보세요!
-        </Text>
-        <LoginContainer>
-          <LoginBoxImage src={LoginBoxImg}>
-            {/* <Id>
-              아이디
-            </Id> */}
-    
-
-          </LoginBoxImage>
-          <LoginButton>
-            로그인
-          </LoginButton>
-          <KakaoLoginButton>
-            <KakaoLogoImg src={KakaoLogo}/>
-            <LoginText>
-              카카오로 시작하기 
-            </LoginText>
+      </SubText>
+      <IntroImage1 src='/images/IntroImg1.png' />
+      <Text>
+        작성한 일기는 친구와 바로 공유 가능해요
+      </Text>
+      <IntroImage2 src='/images/IntroImg2.png'></IntroImage2>
+      <Text>
+        간단한 로그인으로 지금 바로 시작해보세요!
+      </Text>
+      <LoginContainer>
+        <LoginImage>
+          <Form>
+            <TextInput
+              value={id}
+              onInput={(event) => setId(event.target.value)}
+              placeholder="아이디"
+            />
+            <Line />
+            <TextInput
+              value={password}
+              onInput={(event) => {
+                setPassword(event.target.value);
+                setErrorText('');
+              }}
+              placeholder="비밀번호"
+              additionalItem={
+                <PasswordEyeButton
+                  value={fieldHidden}
+                  onClick={() => setFieldHidden((state) => !state)}
+                />
+              }
+              textHidden={fieldHidden}
+            />
+          </Form>
+          <InputErrorText text={errorText} />
+        </LoginImage>
+        <LoginButton onClick={handleLoginClick}>
+          로그인
+        </LoginButton>
+          <KakaoLoginButton src='/images/KakaoLogo.png'>
           </KakaoLoginButton>
+          <RegisterText>
+            <Join onClick={() => navigate('/join')}>회원가입</Join>
+            <Find onClick={() => navigate('/finduser')}>아이디/비밀번호 찾기</Find>
+          </RegisterText>
         </LoginContainer>
     </Background>
   )
