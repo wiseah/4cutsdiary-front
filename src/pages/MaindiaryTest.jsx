@@ -159,7 +159,7 @@ function MaindiaryTest() {
          name="memoryName"
          maxLength="30"
          size="40"
-         defaultValue="추억 이름을 작성해주세요"
+         placeholder="추억 이름을 작성해주세요"
          style={{ marginLeft: '30px',marginTop:'14px', border:'none',background:'transparent',outline:'none',fontSize:'15px'}}
         />
         </TextContainer>
@@ -172,7 +172,7 @@ function MaindiaryTest() {
          name="memoryName"
          maxLength="30"
          size="40"
-         defaultValue="장소 명을 기록해주세요"
+         placeholder="장소 명을 기록해주세요"
          style={{ marginLeft: '30px',marginTop:'14px', border:'none',background:'transparent',outline:'none',fontSize:'15px'}}
         />
         </TextContainer>
@@ -183,7 +183,7 @@ function MaindiaryTest() {
          <label>
          <input 
             type="datetime-local"
-            defaultValue="2024-05-21T21:30"
+            placeholder="2024-05-21T21:30"
             name="memoryName"
             maxLength="30"
             size="40"
@@ -211,7 +211,7 @@ function MaindiaryTest() {
          name="memoryName"
          maxLength="30"
          size="40"
-         defaultValue="추억을 상세하게 기록해보세요!"
+         placeholder="추억을 상세하게 기록해보세요!"
          style={{ marginLeft: '10px',marginTop:'10px', border:'none',background:'transparent',outline:'none',fontSize:'15px'}}
         />
         </SmallShadowBox>

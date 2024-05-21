@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import AlbumImg from '../images/AlbumImg.png'
 import DiaryImg from '../images/DiaryImg.png'
 import AddImg from '../images/AddButton.png'
-import Modal from "./Add";
+import Modal from "../components/Add";
 
 const Background = styled.div`
   background: linear-gradient(
