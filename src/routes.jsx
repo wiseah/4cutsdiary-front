@@ -50,6 +50,7 @@ const routes = [
         element: <Album/>,
         name: '앨범내부'
     },
+
     
 ]
 

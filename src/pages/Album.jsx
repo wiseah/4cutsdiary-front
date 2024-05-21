@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import AlbumImg from '../images/AlbumImg.png'
 import AddImg from '../images/AddImg.png'
-
+import Modal from "../components/InternalModal"
 
 const Background = styled.div`
   background: linear-gradient(
@@ -59,16 +59,9 @@ const AlbumImage = styled.img`
   height: 69px;
   margin-top :20px;
   margin-right: 20px;
-  margin-left: 20px; /* 이미지 간격 설정 */
+  margin-left: 20px; 
 `;
 
-const AddImage = styled.img`
-width: 69px;
-height: 69px;
-margin-top:20px;
-margin-right: 20px;
-margin-left: 20px; /* 이미지 간격 설정 */
-`;
 
 
 const AlbumContainer = styled.div`
@@ -85,10 +78,38 @@ const AlbumContainer = styled.div`
   margin-top: 0;
   border: none;
 `
+const DataCell = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 96px;
+  padding-bottom: 10px;
+  grid-column: span 1;
+  cursor: pointer;
+`
+const AddButton = styled.img`
+  margin-top: 0px;
+  margin-bottom: 10px;
+  margin-left: 17px;
+  margin-right: 18px;
+`
 
   
 
 function Album() {
+  const [showModal, setShowModal] = useState(false);
+  //추가부분
+  const [nickname, setNickname] = useState(''); 
+  useEffect(() => {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser) {
+      setNickname(currentUser.nickname);
+    }
+  }, []);
+
+  const openModal = () => setShowModal(true);
+  const closeModal = ()=> setShowModal(false);
+
     return (
       
     <Background>
@@ -164,18 +185,17 @@ function Album() {
           <SubText>디자인 너무<br />힘드러</SubText>
           </div>
           <div>
-          <AddImage src={AddImg}
-          style={{width:'69px', height:'69px'}}>
-          </AddImage>
           <br />
+          <DataCell>
+          <AddButton src={AddImg} style={{width:'69px', height:'69px'}} onClick={openModal} />
           <SubText>추가하기</SubText>
+          <Modal isOpen={showModal} closeModal={closeModal} />
+          </DataCell>
           </div>
         </HorizontalImageContainer>
-
       </WhiteContainer>
     </Background>
    
-  
   )
 }
 
