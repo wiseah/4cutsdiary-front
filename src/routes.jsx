@@ -55,6 +55,7 @@ const routes = [
         element: <Album/>,
         name: '앨범내부'
     },
+
     {
         path: '/finduser',
         element: <FindUser />,

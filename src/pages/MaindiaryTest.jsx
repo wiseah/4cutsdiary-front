@@ -76,7 +76,7 @@ const TextContainer = styled.div`
 `
 
 const TimeContainer = styled.div`
-  background-color: #fffff;
+  background-color: #ffffff;
   width:326px;
   height:45px;
   margin-left: 1px;
