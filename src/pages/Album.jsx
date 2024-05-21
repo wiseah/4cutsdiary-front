@@ -4,7 +4,6 @@ import AlbumImg from '../images/DiaryImg.png'
 import AddImg from '../images/AddImg.png'
 
 
-
 const Background = styled.div`
   background: linear-gradient(
     to bottom,
