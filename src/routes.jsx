@@ -1,4 +1,4 @@
-import Add from "./pages/Add";
+import Add from "./components/Add";  //윤해 수정 : add.jsx파일을 components파일로 옮김
 import FindUser from "./pages/FindUser";
 import Intro from "./pages/Intro";
 import Join from "./pages/Join";

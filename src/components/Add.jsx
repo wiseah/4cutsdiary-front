@@ -1,21 +1,22 @@
-import React from 'react'
+//2-1.모달
+
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import GalleryImg from "../images/GalleryImg.png"
 import ScanImg from "../images/ScanImg.png"
 import AlbumImg from '../images/AlbumImg.png'
+import AlbumAddModal from './AlbumAddModal'
 
 const ModalContainer = styled.div`
-  border: black 1px solid;
   width: 324px;
   height: 311px;
   background: #ffffff;
   box-shadow: 5px 5px 5px #c9c9c9;
   border-radius: 10px;
-  position: fixed;
+  position: absolute;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  
 `
 const ModalTitle = styled.div`
   color: #D62C4D;
@@ -51,7 +52,7 @@ const RightAddContainer= styled.div`
   border-radius:5px;
 
   &:hover {
-    background-color: #e7e7e7; /* 더 진한 초록색 */
+    background-color: #e7e7e7;
   }
 `
 const AddingContainer = styled.div`
@@ -64,7 +65,7 @@ const AddingContainer = styled.div`
   align-items: center;
 
   &:hover {
-    background-color: #e7e7e7; /* 더 진한 초록색 */
+    background-color: #e7e7e7;
   }
 `
 const GalleryIcon = styled.img`
@@ -74,7 +75,7 @@ const ScanIcon = styled.img`
   margin-left:8px;
 `
 const AlbumIcon = styled.img`
-  margin-top: 40px;
+  margin-top: 30px;
   margin-bottom:10px;
 `
 const IconText = styled.div`
@@ -97,32 +98,38 @@ const CancelButton = styled.div`
   padding-top: 5px;
   font-weight: bold;
 `
-function Add({isOpen, closeModal, children}) {
+
+function Add({ isOpen, closeModal }) {
+  const [showAlbumAddModal, setShowAlbumAddModal] = useState(false);
+
+  const openAlbumAddModal = () => setShowAlbumAddModal(true);
+  const closeAlbumAddModal = () => setShowAlbumAddModal(false);
+
   return (
-  
-   <ModalContainer style={{display: isOpen? "block" : "none"}}>
-      <ModalTitle>무엇을 추가할까요?</ModalTitle>
+    <>
+      <ModalContainer style={{ display: isOpen ? 'block' : 'none' }}>
+        <ModalTitle>무엇을 추가할까요?</ModalTitle>
         <CenterContainer>
           <LeftAddContainer>
             <AddingContainer>
-              <ScanIcon src={ScanImg}></ScanIcon>
+              <ScanIcon src={ScanImg} />
               <IconText>{`스캔해서\n추가하기`}</IconText>
             </AddingContainer>
             <AddingContainer>
-              <GalleryIcon src={GalleryImg}></GalleryIcon>
+              <GalleryIcon src={GalleryImg} />
               <IconText>{`직접\n추가하기`}</IconText>
             </AddingContainer>
           </LeftAddContainer>
-          <RightAddContainer>
-            <AlbumIcon src={AlbumImg}></AlbumIcon>
+          <RightAddContainer onClick={openAlbumAddModal}>
+            <AlbumIcon src={AlbumImg} />
             <IconText>앨범추가</IconText>
-
           </RightAddContainer>
         </CenterContainer>
-      <CancelButton onClick={closeModal}>취소</CancelButton>
-      {children}
-   </ModalContainer>
-  )
+        <CancelButton onClick={closeModal}>취소</CancelButton>
+      </ModalContainer>
+      <AlbumAddModal isAlbumModalOpen={showAlbumAddModal} closeAlbumModal={closeAlbumAddModal} />
+    </>
+  );
 }
 
 export default Add

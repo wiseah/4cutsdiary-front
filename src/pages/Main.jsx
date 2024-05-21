@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import AlbumImg from '../images/AlbumImg.png'
 import DiaryImg from '../images/DiaryImg.png'
 import AddImg from '../images/AddButton.png'
-import Modal from "./Add";
+import Add from "../components/Add";
 
 const Background = styled.div`
   background: linear-gradient(
@@ -79,7 +79,7 @@ function Main() {
 
   const openModal = () => setShowModal(true);
   const closeModal = ()=> setShowModal(false);
-
+ 
     return (
     <Background>
       <TitleContainer>
@@ -125,7 +125,7 @@ function Main() {
         <DataCell>
           <AddButton src={AddImg} onClick={openModal} />
           <AddText>추가하기</AddText>
-          <Modal isOpen={showModal} closeModal={closeModal} />
+          <Add isOpen={showModal} closeModal={closeModal} />
         </DataCell>
         
       </MainContainer>
