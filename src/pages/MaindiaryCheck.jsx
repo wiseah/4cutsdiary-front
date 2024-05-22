@@ -193,7 +193,7 @@ function MaindiaryCheck() {
         </MainText>
         <br />
         <SubText>
-        우리의 추억 이름은?
+        추억이 기록된 장소
         <br />
         <TextContainer>
         <input 
