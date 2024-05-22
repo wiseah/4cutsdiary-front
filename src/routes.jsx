@@ -1,6 +1,5 @@
 import Add from "./components/Add";  //윤해 수정 : add.jsx파일을 components파일로 옮김
 import Album from "./pages/Album";
-
 import FindUser from "./pages/FindUser";
 import Intro from "./pages/Intro";
 import Join from "./pages/Join";
@@ -11,6 +10,7 @@ import Sitemap from "./pages/Sitemap";
 import Test from "./pages/Test";
 import Reader from "./pages/Reader";
 import QRCodeScanner from "./pages/Qrcode";
+import MaindiaryCheck from "./pages/MaindiaryCheck";
 
 
 const routes = [
@@ -48,6 +48,12 @@ const routes = [
         path: '/maindiarytest',
         element : <MaindiaryTest />,
         name: '메인페이지_일기작성'
+    },
+
+    {
+        path: '/maindiarycheck',
+        element : <MaindiaryCheck />,
+        name: '메인페이지_일기확인'
     },
 
     {
