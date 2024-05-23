@@ -6,6 +6,7 @@ import GalleryImg from "../images/GalleryImg.png"
 import ScanImg from "../images/ScanImg.png"
 import AlbumImg from '../images/AlbumImg.png'
 import AlbumAddModal from './AlbumAddModal'
+import { useNavigate } from 'react-router-dom';
 
 const ModalContainer = styled.div`
   width: 324px;
@@ -100,6 +101,8 @@ const CancelButton = styled.div`
 `
 
 function Add({ isOpen, closeModal }) {
+  const navigate = useNavigate();
+
   const [showAlbumAddModal, setShowAlbumAddModal] = useState(false);
 
   const openAlbumAddModal = () => setShowAlbumAddModal(true);
@@ -111,7 +114,7 @@ function Add({ isOpen, closeModal }) {
         <ModalTitle>무엇을 추가할까요?</ModalTitle>
         <CenterContainer>
           <LeftAddContainer>
-            <AddingContainer>
+            <AddingContainer onClick={() => navigate('/scan')}>
               <ScanIcon src={ScanImg} />
               <IconText>{`스캔해서\n추가하기`}</IconText>
             </AddingContainer>

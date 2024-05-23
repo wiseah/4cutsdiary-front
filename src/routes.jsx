@@ -5,7 +5,6 @@ import Intro from "./pages/Intro";
 import Join from "./pages/Join";
 import Main from "./pages/Main";
 import MaindiaryTest from "./pages/MaindiaryTest";
-import Register from "./pages/Register";
 import Sitemap from "./pages/Sitemap";
 import Test from "./pages/Test";
 import Reader from "./pages/Reader";
@@ -33,16 +32,11 @@ const routes = [
         element: <Main />,
         name: '메인 페이지'
     },
-    {
-        path: '/add',
-        element: <Add />,
-        name: '메인페이지_추가하기 페이지'
-    },
-    {
-        path: '/test',
-        element: <Test />,
-        name: '테스트 페이지'
-    },
+    // {
+    //     path: '/add',
+    //     element: <Add />,
+    //     name: '메인페이지_추가하기 페이지'
+    // },
 
     {
         path: '/maindiarytest',
@@ -76,6 +70,12 @@ const routes = [
         path: '/scan2',
         element: <Reader />,
         name: 'qr스캔2'
+    },
+
+    {
+        path: '/test',
+        element: <Test />,
+        name: '테스트 페이지'
     },
 ]
 

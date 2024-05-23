@@ -48,6 +48,7 @@ const DataCell = styled.div`
   height: 96px;
   padding-bottom: 10px;
   grid-column: span 1;
+  cursor: pointer;
 `
 
 const AlbumIcon = styled.img`
@@ -88,9 +89,9 @@ function Main() {
         </BoxTitle>
       </TitleContainer>
       <MainContainer>
-       <DataCell>
-          <AlbumIcon src={AlbumImg}></AlbumIcon>
-          <AlbumName>(여/남)친 ♡</AlbumName>
+        <DataCell>
+            <AlbumIcon src={AlbumImg}></AlbumIcon>
+            <AlbumName>(여/남)친 ♡</AlbumName>
         </DataCell>
         <DataCell>
           <AlbumIcon src={AlbumImg}></AlbumIcon>
