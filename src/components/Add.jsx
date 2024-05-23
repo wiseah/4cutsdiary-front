@@ -1,11 +1,10 @@
-//2-1.모달
-
-import React, { useState } from 'react'
+//2-1
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import GalleryImg from "../images/GalleryImg.png"
-import ScanImg from "../images/ScanImg.png"
-import AlbumImg from '../images/AlbumImg.png'
-import AlbumAddModal from './AlbumAddModal'
+import GalleryImg from "../images/GalleryImg.png";
+import ScanImg from "../images/ScanImg.png";
+import AlbumImg from '../images/AlbumImg.png';
+import AlbumAddModal from './AlbumAddModal';
 import { useNavigate } from 'react-router-dom';
 
 const ModalContainer = styled.div`
@@ -18,7 +17,8 @@ const ModalContainer = styled.div`
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-`
+`;
+
 const ModalTitle = styled.div`
   color: #D62C4D;
   text-align: center;
@@ -26,14 +26,16 @@ const ModalTitle = styled.div`
   font-weight: bold;
   margin-top: 10px;
   margin-bottom: 20px;
-`
+`;
+
 const CenterContainer = styled.div`
   height:190px;
   width: 290px;
   padding-left: 30px;
   display: flex;
   flex-direction: row;
-`
+`;
+
 const LeftAddContainer = styled.div`
   width:120px;
   height:173px;
@@ -42,8 +44,9 @@ const LeftAddContainer = styled.div`
   align-items: center;
   margin-right:15px;
   justify-content: space-between;
-`
-const RightAddContainer= styled.div`
+`;
+
+const RightAddContainer = styled.div`
   border: black 2px solid;
   width: 120px;
   height: 170px;
@@ -51,11 +54,11 @@ const RightAddContainer= styled.div`
   flex-direction: column;
   align-items: center;
   border-radius:5px;
-
   &:hover {
     background-color: #e7e7e7;
   }
-`
+`;
+
 const AddingContainer = styled.div`
   width: 125px;
   height:75px;
@@ -64,21 +67,24 @@ const AddingContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-
   &:hover {
     background-color: #e7e7e7;
   }
-`
+`;
+
 const GalleryIcon = styled.img`
   margin-left: 12px;
-`
+`;
+
 const ScanIcon = styled.img`
   margin-left:8px;
-`
+`;
+
 const AlbumIcon = styled.img`
   margin-top: 30px;
   margin-bottom:10px;
-`
+`;
+
 const IconText = styled.div`
   width:55px;
   height: 30px;
@@ -86,7 +92,8 @@ const IconText = styled.div`
   font-weight: bold;
   white-space: pre-line;
   margin-left:3px;
-`
+`;
+
 const CancelButton = styled.div`
   width:290px;
   height:29px;
@@ -98,11 +105,11 @@ const CancelButton = styled.div`
   margin-left: 17px;
   padding-top: 5px;
   font-weight: bold;
-`
+  cursor: pointer;
+`;
 
-function Add({ isOpen, closeModal }) {
+function Add({ isOpen, closeModal, addAlbum }) {
   const navigate = useNavigate();
-
   const [showAlbumAddModal, setShowAlbumAddModal] = useState(false);
 
   const openAlbumAddModal = () => setShowAlbumAddModal(true);
@@ -130,9 +137,9 @@ function Add({ isOpen, closeModal }) {
         </CenterContainer>
         <CancelButton onClick={closeModal}>취소</CancelButton>
       </ModalContainer>
-      <AlbumAddModal isAlbumModalOpen={showAlbumAddModal} closeAlbumModal={closeAlbumAddModal} />
+      <AlbumAddModal isAlbumModalOpen={showAlbumAddModal} closeAlbumModal={closeAlbumAddModal} addAlbum={addAlbum} />
     </>
   );
 }
 
-export default Add
+export default Add;
