@@ -5,7 +5,7 @@ import styled from "styled-components";
 const Header = styled.div`
   background-color: #3B3B3B;
   color: #ffffff;
-  width: 390px;
+  /* width: 390px; */
   height: 100px;
   padding: 30px;
 `
