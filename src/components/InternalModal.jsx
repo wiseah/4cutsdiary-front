@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import DirectImg from '../images/DirectImg.png'
 import ScanAddImg from '../images/ScanAddImg.png'
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
 border: black 1px solid;
@@ -87,16 +88,15 @@ const DeleteButton = styled.div`
   font-weight: bold;
 `
  
-
-
-
 function InternalModal({isOpen, closeModal, children}) {
+  const navigate = useNavigate();
+
     return (
     
      <Container style={{display: isOpen? "block" : "none"}}>
         <Title>무엇을 추가할까요?</Title>
           <MiddleContainer>
-            <LeftContainer>
+            <LeftContainer onClick={()=>navigate('/scan')}>
                <ScanAddImage src={ScanAddImg}></ScanAddImage>
                 <Text>{`스캔해서\n추가하기`}</Text>
             </LeftContainer>

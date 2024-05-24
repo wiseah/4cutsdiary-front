@@ -1,10 +1,9 @@
-// AlbumForm.js
 import React from 'react';
 import styled from 'styled-components';
 import AlbumImg from '../images/AlbumImg.png';
 import DiaryImg from '../images/DiaryImg.png';
 
-const DataCell = styled.div`
+const AlbumformContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,22 +33,20 @@ const DiaryName = styled.div`
   font-weight: 600;
 `;
 
-const AlbumForm = ({ type, name }) => {
-  return (
-    <DataCell>
-      {type === 'album' ? (
-        <>
-          <AlbumIcon src={AlbumImg} />
-          <AlbumName>{name}</AlbumName>
-        </>
-      ) : (
-        <>
-          <DiaryIcon src={DiaryImg} />
-          <DiaryName>{name}</DiaryName>
-        </>
-      )}
-    </DataCell>
-  );
-};
+const Albumform = ({ type, name, onClick }) => (
+  <AlbumformContainer onClick={onClick}>
+    {type === 'album' ? (
+      <>
+        <AlbumIcon src={AlbumImg} />
+        <AlbumName>{name}</AlbumName>
+      </>
+    ) : type === 'diary' ? (
+      <>
+        <DiaryIcon src={DiaryImg} />
+        <DiaryName>{name}</DiaryName>
+      </>
+    ) : null}
+  </AlbumformContainer>
+);
 
-export default AlbumForm;
+export default Albumform;

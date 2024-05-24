@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import AlbumImg from '../images/DiaryImg.png'
-import AddImg from '../images/AddImg.png'
-import Modal from "../components/InternalModal"
+import AddImg from '../images/AddImg.png';
+import Modal from "../components/InternalModal";
+import AlbumForm from '../components/AlbumForm';
 
 const Background = styled.div`
   background: linear-gradient(
@@ -11,20 +11,81 @@ const Background = styled.div`
     #FCE6F1 45%,
     #FF9CAF 100%
   );
-  height: 530px;  // 변경된 부분
+  height: 560px;
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+//추가
+const TitleContainer = styled.div`
+  margin-top: 20px;
+  background: #F48B9F;
+  height: 33px;
+  width: 340px;
+  border-radius: 10px 10px 0px 0px;
+`;
+const MainContainer = styled.div`
+  background: #ffffff;
+  /* height: 434px; */
+  width: 340px;
+  border-radius: 0px 0px 10px 10px;
+  padding: 24px 0px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+`;
+const BoxTitle = styled.div`
+  padding-top: 5px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+`;
+//여기까지 추가부분
 
+const WhiteContainer = styled.div`
+  background-color: #ffffff;
+  width: 326px;
+  height: 460px;
+  margin-top: 25px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
-const Text = styled.div`
-  color: #D62C4D;
-  font-size: 20px;
-  font-weight: 600;
-  margin-top: 30px;
-
+const AlbumContainer = styled.div`
+  background-color: #F48B9F;
+  width: 100%;
+  height: 32px;
+  border-radius: 10px 10px 0px 0px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  font-weight: 700;
 `;
+
+const HorizontalImageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+`;
+
+const AddButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  margin: 10px;
+`;
+
+const AddButton = styled.img`
+  width: 69px;
+  height: 69px;
+`;
+
 const SubText = styled.div`
   text-align: center;
   color: #4D3338;
@@ -33,72 +94,16 @@ const SubText = styled.div`
   margin-top: 5px;
 `;
 
-
-const WhiteContainer = styled.div`
-  background-color: #ffffff;
-  width:326px;
-  height:460px;
-  margin-top: 25px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-`;
-
-
-const HorizontalImageContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  
-
-`;
-
-const AlbumImage = styled.img`
-  width: 69px;
-  height: 69px;
-  margin-top :20px;
-  margin-right: 20px;
-  margin-left: 20px; 
-`;
-
-
-
-const AlbumContainer = styled.div`
-  background-color: #F48B9F;
-  width:326px;
-  height:32px;
-  border-radius: 10px 10px 0px 0px;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 17px;
-  font-weight: 700;
-  margin-top: 0;
-  border: none;
-`
-const DataCell = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 96px;
-  padding-bottom: 10px;
-  grid-column: span 1;
-  cursor: pointer;
-`
-const AddButton = styled.img`
-  margin-top: 0px;
-  margin-bottom: 10px;
-  margin-left: 17px;
-  margin-right: 18px;
-`
-
-  
-
 function Album() {
   const [showModal, setShowModal] = useState(false);
-  //추가부분
+  const [diaries, setDiaries] = useState([
+    { type: 'diary', name: '공주 1' },
+    { type: 'diary', name: '공주 2' },
+    { type: 'diary', name: '공주 3' },
+    { type: 'diary', name: '곱등이와 인생네컷' },
+    { type: 'diary', name: '디자인 너무 힘드러' }
+  ]);
+
   const [nickname, setNickname] = useState(''); 
   useEffect(() => {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -108,96 +113,30 @@ function Album() {
   }, []);
 
   const openModal = () => setShowModal(true);
-  const closeModal = ()=> setShowModal(false);
+  const closeModal = () => setShowModal(false);
 
-    return (
-      
+  const addDiary = (name) => {
+    setDiaries([...diaries, { type: 'diary', name }]);
+    closeModal();
+  };
+
+  return (
     <Background>
-       
-      <WhiteContainer>
-        <AlbumContainer>
-            공주 앨범
-          </AlbumContainer>
-
-        <HorizontalImageContainer>
-          <div> 
-          <AlbumImage src={AlbumImg}
-          style={{width:'69px', height:'69px'}}>
-          </AlbumImage>
-          <br />
-          <SubText>공주 1</SubText>
-          </div>
-          <div> 
-          <AlbumImage src={AlbumImg}
-          style={{width:'69px', height:'69px'}}>
-          </AlbumImage>
-          <br />
-          <SubText>공주 2</SubText>
-          </div>
-          <div> 
-          <AlbumImage src={AlbumImg}
-          style={{width:'69px', height:'69px'}}>
-          </AlbumImage>
-          <br />
-          <SubText>공주 3</SubText>
-          </div>
-        </HorizontalImageContainer>
-        <br />
-
-        <HorizontalImageContainer>
-        <div> 
-          <AlbumImage src={AlbumImg}
-          style={{width:'69px', height:'69px'}}>
-          </AlbumImage>
-          <br />
-          <SubText>공주 1</SubText>
-          </div>
-          <div> 
-          <AlbumImage src={AlbumImg}
-          style={{width:'69px', height:'69px'}}>
-          </AlbumImage>
-          <br />
-          <SubText>공주 2</SubText>
-          </div>
-          <div> 
-          <AlbumImage src={AlbumImg}
-          style={{width:'69px', height:'69px'}}>
-          </AlbumImage>
-          <br />
-          <SubText>공주 3</SubText>
-          </div>
-        </HorizontalImageContainer>
-        <br />
-
-        <HorizontalImageContainer>
-         <div> 
-          <AlbumImage src={AlbumImg}
-          style={{width:'69px', height:'69px'}}>
-          </AlbumImage>
-          <br />
-          <SubText>곱등이와 <br />인생네컷</SubText>
-          </div>
-          <div> 
-          <AlbumImage src={AlbumImg}
-          style={{width:'69px', height:'69px'}}>
-          </AlbumImage>
-          <br />
-          <SubText>디자인 너무<br />힘드러</SubText>
-          </div>
-          <div>
-          <br />
-          <DataCell>
-          <AddButton src={AddImg} style={{width:'69px', height:'69px'}} onClick={openModal} />
+      <TitleContainer>
+        <BoxTitle>{nickname} 앨범</BoxTitle>
+      </TitleContainer>
+      <MainContainer>
+        {diaries.map((diary, index) => (
+          <AlbumForm key={index} type={diary.type} name={diary.name} />
+        ))}
+        <AddButtonContainer onClick={openModal}>
+          <AddButton src={AddImg} />
           <SubText>추가하기</SubText>
-          <Modal isOpen={showModal} closeModal={closeModal} />
-          </DataCell>
-          </div>
-        </HorizontalImageContainer>
-      </WhiteContainer>
+        </AddButtonContainer>
+      </MainContainer>
+      <Modal isOpen={showModal} closeModal={closeModal} addDiary={addDiary} />
     </Background>
-   
-  )
+  );
 }
 
-
-export default Album
+export default Album;
