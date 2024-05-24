@@ -57,6 +57,12 @@ const routes = [
     },
 
     {
+        path: '/album/1',
+        element: <Album/>,
+        name: '앨범내부1'
+    },
+
+    {
         path: '/finduser',
         element: <FindUser />,
         name: '아이디/비밀번호 찾기 페이지'
