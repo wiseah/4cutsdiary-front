@@ -1,7 +1,8 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components';
 import DirectImg from '../images/DirectImg.png'
 import ScanAddImg from '../images/ScanAddImg.png'
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
 border: black 1px solid;
@@ -87,20 +88,26 @@ const DeleteButton = styled.div`
   font-weight: bold;
 `
  
+function InternalModal({isOpen, closeModal, children, addDiary}) {
+  const navigate = useNavigate();
+  const [diaryName, setDiaryName] = useState('');
 
+  const handleAddDiary = () => {
+    addDiary(diaryName);
+    setDiaryName('');
+    closeModal();
+  };
 
-
-function InternalModal({isOpen, closeModal, children}) {
     return (
     
      <Container style={{display: isOpen? "block" : "none"}}>
         <Title>무엇을 추가할까요?</Title>
           <MiddleContainer>
-            <LeftContainer>
+            <LeftContainer onClick={()=>navigate('/scan')}>
                <ScanAddImage src={ScanAddImg}></ScanAddImage>
                 <Text>{`스캔해서\n추가하기`}</Text>
             </LeftContainer>
-            <RightContainer>
+            <RightContainer onClick={handleAddDiary}>
             <DirectImage src={DirectImg}></DirectImage>
                 <Text>{`직접\n추가하기`}</Text>
             </RightContainer>

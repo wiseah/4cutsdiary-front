@@ -1,9 +1,9 @@
 // Main.js
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import styled from 'styled-components';
 import AddImg from '../images/AddButton.png';
-import AlbumAddModal from '../components/AlbumAddModal';
-import AlbumForm from '../components/AlbumForm';
+import Add from "../components/Add";
+import AlbumForm from "../components/AlbumForm";
 
 const Background = styled.div`
   background: linear-gradient(
@@ -20,10 +20,10 @@ const Background = styled.div`
 
 const MainContainer = styled.div`
   background: #ffffff;
-  height: 434px;
+  /* height: 434px; */
   width: 340px;
   border-radius: 0px 0px 10px 10px;
-  padding-top: 24px;
+  padding: 24px 0px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 `;
@@ -77,6 +77,14 @@ function Main() {
     { type: 'diary', name: '12기' }
   ]);
 
+  const [nickname, setNickname] = useState(''); 
+  useEffect(() => {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser) {
+      setNickname(currentUser.nickname);
+    }
+  }, []);
+
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
 
@@ -88,7 +96,7 @@ function Main() {
   return (
     <Background>
       <TitleContainer>
-        <BoxTitle>[현아]의 네컷 일기 모음</BoxTitle>
+        <BoxTitle>{nickname}의 네컷 일기 모음</BoxTitle>
       </TitleContainer>
       <MainContainer>
         {albums.map((album, index) => (
@@ -99,7 +107,7 @@ function Main() {
           <AddText>추가하기</AddText>
         </AddButtonContainer>
       </MainContainer>
-      <AlbumAddModal isAlbumModalOpen={showModal} closeAlbumModal={closeModal} addAlbum={addAlbum} />
+      <Add isOpen={showModal} closeModal={closeModal} addAlbum={addAlbum} />
     </Background>
   );
 }
