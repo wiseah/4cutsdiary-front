@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components';
 import DirectImg from '../images/DirectImg.png'
 import ScanAddImg from '../images/ScanAddImg.png'
@@ -88,8 +88,15 @@ const DeleteButton = styled.div`
   font-weight: bold;
 `
  
-function InternalModal({isOpen, closeModal, children}) {
+function InternalModal({isOpen, closeModal, children, addDiary}) {
   const navigate = useNavigate();
+  const [diaryName, setDiaryName] = useState('');
+
+  const handleAddDiary = () => {
+    addDiary(diaryName);
+    setDiaryName('');
+    closeModal();
+  };
 
     return (
     
@@ -100,7 +107,7 @@ function InternalModal({isOpen, closeModal, children}) {
                <ScanAddImage src={ScanAddImg}></ScanAddImage>
                 <Text>{`스캔해서\n추가하기`}</Text>
             </LeftContainer>
-            <RightContainer>
+            <RightContainer onClick={handleAddDiary}>
             <DirectImage src={DirectImg}></DirectImage>
                 <Text>{`직접\n추가하기`}</Text>
             </RightContainer>
