@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import AddImg from '../images/AddImg.png';
 import Modal from "../components/InternalModal";
 import AlbumForm from '../components/AlbumForm';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Background = styled.div`
   background: linear-gradient(
@@ -16,7 +17,7 @@ const Background = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-//추가
+
 const TitleContainer = styled.div`
   margin-top: 20px;
   background: #F48B9F;
@@ -24,53 +25,22 @@ const TitleContainer = styled.div`
   width: 340px;
   border-radius: 10px 10px 0px 0px;
 `;
+
 const MainContainer = styled.div`
   background: #ffffff;
-  /* height: 434px; */
   width: 340px;
   border-radius: 0px 0px 10px 10px;
   padding: 24px 0px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 `;
+
 const BoxTitle = styled.div`
   padding-top: 5px;
   text-align: center;
   color: #ffffff;
   font-size: 16px;
   font-weight: bold;
-`;
-//여기까지 추가부분
-
-const WhiteContainer = styled.div`
-  background-color: #ffffff;
-  width: 326px;
-  height: 460px;
-  margin-top: 25px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const AlbumContainer = styled.div`
-  background-color: #F48B9F;
-  width: 100%;
-  height: 32px;
-  border-radius: 10px 10px 0px 0px;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 17px;
-  font-weight: 700;
-`;
-
-const HorizontalImageContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 20px;
 `;
 
 const AddButtonContainer = styled.div`
@@ -96,38 +66,53 @@ const SubText = styled.div`
 
 function Album() {
   const [showModal, setShowModal] = useState(false);
-  const [diaries, setDiaries] = useState([
-    { type: 'diary', name: '공주 1' },
-    { type: 'diary', name: '공주 2' },
-    { type: 'diary', name: '공주 3' },
-    { type: 'diary', name: '곱등이와 인생네컷' },
-    { type: 'diary', name: '디자인 너무 힘드러' }
+  const [items, setItems] = useState([
+    { type: 'diary', name: '공주 1', id: 1 },
+    { type: 'diary', name: '공주 2', id: 2 },
+    { type: 'diary', name: '공주 3', id: 3 },
+    { type: 'diary', name: '곱등이와 인생네컷', id: 4 },
+    { type: 'diary', name: '디자인 너무 힘드러', id: 5 }
   ]);
 
-  const [nickname, setNickname] = useState(''); 
-  useEffect(() => {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser) {
-      setNickname(currentUser.nickname);
-    }
-  }, []);
+  const navigate = useNavigate();
+  const { albumId } = useParams();
+
+  // 앨범명과 일치하는 앨범을 찾습니다.
+  const album = items.find(item => item.type === 'album' && item.id === parseInt(albumId));
+  // const [nickname, setNickname] = useState('');
+
+  // useEffect(() => {
+  //   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  //   if (currentUser) {
+  //     setNickname(currentUser.nickname);
+  //   }
+  // }, []);
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
 
   const addDiary = (name) => {
-    setDiaries([...diaries, { type: 'diary', name }]);
+    const newId = items.length ? items[items.length - 1].id + 1 : 1;
+    setItems([...items, { type: 'diary', name, id: newId }]);
     closeModal();
+  };
+
+  const handleClick = (type, id) => {
+    if (type === 'album') {
+      navigate(`/album/${id}`);
+    } else if (type === 'diary') {
+      navigate(`/maindiarycheck/${id}`);
+    }
   };
 
   return (
     <Background>
       <TitleContainer>
-        <BoxTitle>{nickname} 앨범</BoxTitle>
+        <BoxTitle>{album ? album.name : '앨범'}</BoxTitle>
       </TitleContainer>
       <MainContainer>
-        {diaries.map((diary, index) => (
-          <AlbumForm key={index} type={diary.type} name={diary.name} />
+        {items.map((item, index) => (
+          <AlbumForm key={index} type={item.type} name={item.name} index={item.id} onClick={handleClick} />
         ))}
         <AddButtonContainer onClick={openModal}>
           <AddButton src={AddImg} />

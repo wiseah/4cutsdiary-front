@@ -1,9 +1,9 @@
-// Main.js
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import AddImg from '../images/AddButton.png';
 import Add from "../components/Add";
 import AlbumForm from "../components/AlbumForm";
+import { useNavigate } from 'react-router-dom';
 
 const Background = styled.div`
   background: linear-gradient(
@@ -20,7 +20,6 @@ const Background = styled.div`
 
 const MainContainer = styled.div`
   background: #ffffff;
-  /* height: 434px; */
   width: 340px;
   border-radius: 0px 0px 10px 10px;
   padding: 24px 0px;
@@ -67,17 +66,19 @@ const AddText = styled.div`
 function Main() {
   const [showModal, setShowModal] = useState(false);
   const [albums, setAlbums] = useState([
-    { type: 'album', name: '(여/남)친 ♡' },
-    { type: 'album', name: '남는건사진뿐' },
-    { type: 'album', name: '멋사' },
-    { type: 'album', name: '앨범 4' },
-    { type: 'album', name: '앨범 5' },
-    { type: 'album', name: '앨범 6' },
-    { type: 'diary', name: '멋쟁이사자처럼' },
-    { type: 'diary', name: '12기' }
+    { type: 'album', name: '(여/남)친 ♡', id: 1 },
+    { type: 'album', name: '남는건사진뿐', id: 2 },
+    { type: 'album', name: '멋사', id: 3 },
+    { type: 'album', name: '앨범 4', id: 4 },
+    { type: 'album', name: '앨범 5', id: 5 },
+    { type: 'album', name: '앨범 6', id: 6 },
+    { type: 'diary', name: '멋쟁이사자처럼', id: 7 },
+    { type: 'diary', name: '12기', id: 8 }
   ]);
 
-  const [nickname, setNickname] = useState(''); 
+  const [nickname, setNickname] = useState('');
+  const navigate = useNavigate();
+
   useEffect(() => {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser) {
@@ -89,10 +90,19 @@ function Main() {
   const closeModal = () => setShowModal(false);
 
   const addAlbum = (name) => {
-    setAlbums([...albums, { type: 'album', name }]);
+    const newId = albums.length ? albums[albums.length - 1].id + 1 : 1;
+    setAlbums([...albums, { type: 'album', name, id: newId }]);
     closeModal();
   };
 
+  const handleClick = (type, id) => {
+    if (type === 'album') {
+      navigate(`/album/${id}`);
+    } else if (type === 'diary') {
+      navigate(`/maindiarycheck/${id}`);
+    }
+  }; 
+  
   return (
     <Background>
       <TitleContainer>
@@ -100,7 +110,7 @@ function Main() {
       </TitleContainer>
       <MainContainer>
         {albums.map((album, index) => (
-          <AlbumForm key={index} type={album.type} name={album.name} />
+          <AlbumForm key={index} type={album.type} name={album.name} index={album.id} onClick={() => handleClick(album.type, album.id, album.name)} />
         ))}
         <AddButtonContainer onClick={openModal}>
           <AddButton src={AddImg} />
