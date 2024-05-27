@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import styled from 'styled-components';
 import DirectImg from '../images/DirectImg.png'
 import ScanAddImg from '../images/ScanAddImg.png'
@@ -90,12 +90,23 @@ const DeleteButton = styled.div`
  
 function InternalModal({isOpen, closeModal, children, addDiary}) {
   const navigate = useNavigate();
-  const [diaryName, setDiaryName] = useState('');
+  const [file, setFile] = useState(null);
+  const fileInputRef = useRef(null);
 
-  const handleAddDiary = () => {
-    addDiary(diaryName);
-    setDiaryName('');
-    closeModal();
+  useEffect(() => {
+    if (file) {
+      const url = URL.createObjectURL(file);
+      sessionStorage.setItem('image',url);
+      navigate('/maindiarytest');
+    }
+  }, [file])
+  
+  const handleFileChange = event => {
+    setFile(event.target.files[0]);
+  };
+
+  const triggerFileInput = () => {
+    fileInputRef.current.click();
   };
 
     return (
@@ -104,14 +115,15 @@ function InternalModal({isOpen, closeModal, children, addDiary}) {
         <Title>무엇을 추가할까요?</Title>
           <MiddleContainer>
             <LeftContainer onClick={()=>navigate('/scan')}>
-               <ScanAddImage src={ScanAddImg}></ScanAddImage>
-                <Text>{`스캔해서\n추가하기`}</Text>
+              <ScanAddImage src={ScanAddImg}></ScanAddImage>
+              <Text>{`스캔해서\n추가하기`}</Text>
             </LeftContainer>
-            <RightContainer onClick={handleAddDiary}>
-            <DirectImage src={DirectImg}></DirectImage>
-                <Text>{`직접\n추가하기`}</Text>
+            <RightContainer onClick={triggerFileInput}>
+              <DirectImage src={DirectImg}></DirectImage>
+              <Text>{`직접\n추가하기`}</Text>
             </RightContainer>
           </MiddleContainer>
+        <input type="file" ref={fileInputRef} onChange={handleFileChange} style={{ display: 'none' }} />
         <DeleteButton onClick={closeModal}>취소</DeleteButton>
         {children}
      </Container>
