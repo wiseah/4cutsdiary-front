@@ -1,5 +1,5 @@
 //2-1
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import GalleryImg from "../images/GalleryImg.png";
 import ScanImg from "../images/ScanImg.png";
@@ -114,6 +114,25 @@ function Add({ isOpen, closeModal, addAlbum }) {
 
   const openAlbumAddModal = () => setShowAlbumAddModal(true);
   const closeAlbumAddModal = () => setShowAlbumAddModal(false);
+//파일 직접추가 관련
+  const [file, setFile] = useState(null);
+  const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    if (file) {
+      const url = URL.createObjectURL(file);
+      sessionStorage.setItem('image',url);
+      navigate('/maindiarytest');
+    }
+  }, [file])
+  
+  const handleFileChange = event => {
+    setFile(event.target.files[0]);
+  };
+
+  const triggerFileInput = () => {
+    fileInputRef.current.click();
+  };
 
   return (
     <>
@@ -125,11 +144,12 @@ function Add({ isOpen, closeModal, addAlbum }) {
               <ScanIcon src={ScanImg} />
               <IconText>{`스캔해서\n추가하기`}</IconText>
             </AddingContainer>
-            <AddingContainer>
+            <AddingContainer onClick={triggerFileInput}>
               <GalleryIcon src={GalleryImg} />
               <IconText>{`직접\n추가하기`}</IconText>
             </AddingContainer>
           </LeftAddContainer>
+          <input type="file" ref={fileInputRef} onChange={handleFileChange} style={{ display: 'none' }} />
           <RightAddContainer onClick={openAlbumAddModal}>
             <AlbumIcon src={AlbumImg} />
             <IconText>앨범추가</IconText>

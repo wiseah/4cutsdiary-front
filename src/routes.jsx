@@ -13,12 +13,12 @@ import MaindiaryCheck from "./pages/MaindiaryCheck";
 
 
 const routes = [
+    // {
+    //     path: '/',
+    //     element: <Sitemap />,
+    // },
     {
         path: '/',
-        element: <Sitemap />,
-    },
-    {
-        path: '/intro',
         element: <Intro />,
         name: '랜딩페이지(첫 페이지)'
     },
