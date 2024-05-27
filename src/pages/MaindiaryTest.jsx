@@ -1,6 +1,6 @@
-import React from 'react'
-import styled from 'styled-components';
-import PictureImg from '../images/PictureImg.png'
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import PictureImg from "../images/PictureImg.png";
 import { IoIosArrowBack } from "react-icons/io";
 
 const Background = styled.div`
@@ -30,7 +30,7 @@ const WhiteContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
-`
+`;
 
 const Header = styled.div`
 display: flex;
@@ -39,7 +39,6 @@ justify-content: space-between;
 align-items: center;
 margin-top : 20px;
 `;
-
 
 const BackIcon = styled(IoIosArrowBack)`
   color: #D62C4D;
@@ -73,7 +72,7 @@ const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 
 const TimeContainer = styled.div`
   background-color: #ffffff;
@@ -88,17 +87,14 @@ const TimeContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
-
+`;
 
 const PictureImage = styled.img`
   margin-top: 25px;
-`
+`;
 //const IntroImage1 = styled.img`
 //  margin-top: 25px;
 //`
-
-
 
 const ShadowBox = styled.div`
 width: 310px;
@@ -111,12 +107,11 @@ border-width : 1px;
 border-style: solid;
 border-left-width:5px ;
 border-color:#D62C4D;
-`
+`;
 
 const SmallShadowBox = styled(ShadowBox)`
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-`
-
+`;
 
 const RedButton = styled.button`
   width: 290px;
@@ -132,95 +127,117 @@ const RedButton = styled.button`
   margin-top: 20px;
   margin-left: 45px;
   border: none;
-`
-
-
-  
-
+`;
 
 function MaindiaryTest() {
+  const [uploadImage, setUploadImage] = useState();
+
+  useEffect(() => {
+    var image = sessionStorage.getItem('image');
+    setUploadImage(image);
+    sessionStorage.removeItem('image');
+  }, []);
+
   return (
-      <Background>
-        <WhiteContainer>
+    <Background>
+      <WhiteContainer>
         <Header>
           <BackIcon />
-          <Text>
-          추억 생성하기
-          </Text>
+          <Text>추억 생성하기</Text>
         </Header>
         <br />
         <br />
         <SubText>
-        우리의 추억 이름은?
-        <br />
-        <TextContainer>
-        <input 
-         type="text"
-         name="memoryName"
-         maxLength="30"
-         size="40"
-         placeholder="추억 이름을 작성해주세요"
-         style={{ marginLeft: '30px',marginTop:'14px', border:'none',background:'transparent',outline:'none',fontSize:'15px'}}
-        />
-        </TextContainer>
-        <br />
-        추억이 기록된 장소
-        <br />
-        <TextContainer>
-        <input 
-         type="text"
-         name="memoryName"
-         maxLength="30"
-         size="40"
-         placeholder="장소 명을 기록해주세요"
-         style={{ marginLeft: '30px',marginTop:'14px', border:'none',background:'transparent',outline:'none',fontSize:'15px'}}
-        />
-        </TextContainer>
-        <br />
-        우리의 순간이 기록된 시간
-        <TimeContainer>
-        <form>
-         <label>
-         <input 
-            type="datetime-local"
-            placeholder="2024-05-21T21:30"
+          우리의 추억 이름은?
+          <br />
+          <TextContainer>
+            <input
+              type="text"
+              name="memoryName"
+              maxLength="30"
+              size="40"
+              placeholder="추억 이름을 작성해주세요"
+              style={{
+                marginLeft: "30px",
+                marginTop: "14px",
+                border: "none",
+                background: "transparent",
+                outline: "none",
+                fontSize: "15px",
+              }}
+            />
+          </TextContainer>
+          <br />
+          추억이 기록된 장소
+          <br />
+          <TextContainer>
+            <input
+              type="text"
+              name="memoryName"
+              maxLength="30"
+              size="40"
+              placeholder="장소 명을 기록해주세요"
+              style={{
+                marginLeft: "30px",
+                marginTop: "14px",
+                border: "none",
+                background: "transparent",
+                outline: "none",
+                fontSize: "15px",
+              }}
+            />
+          </TextContainer>
+          <br />
+          우리의 순간이 기록된 시간
+          <TimeContainer>
+            <form>
+              <label>
+                <input
+                  type="datetime-local"
+                  placeholder="2024-05-21T21:30"
+                  name="memoryName"
+                  maxLength="30"
+                  size="40"
+                  style={{
+                    marginLeft: "20px",
+                    marginTop: "14px",
+                    border: "none",
+                    background: "transparent",
+                    outline: "none",
+                    fontSize: "15px",
+                  }}
+                />
+              </label>
+            </form>
+          </TimeContainer>
+          <br />
+          일기 쓰기
+        </SubText>
+        <PictureImage
+          src={uploadImage || PictureImg}
+          style={{ width: "320px", height: "485px" }}
+        ></PictureImage>
+        <SmallShadowBox>
+          <input
+            type="text"
             name="memoryName"
             maxLength="30"
             size="40"
-            style={{ 
-              marginLeft: '20px',
-              marginTop: '14px', 
-              border: 'none',
-              background: 'transparent',
-              outline: 'none',
-              fontSize: '15px'
+            placeholder="추억을 상세하게 기록해보세요!"
+            style={{
+              marginLeft: "10px",
+              marginTop: "10px",
+              border: "none",
+              background: "transparent",
+              outline: "none",
+              fontSize: "15px",
             }}
           />
-         </label>
-        </form>
-        </TimeContainer>
-        <br />
-        일기 쓰기
-        </SubText>
-        <PictureImage src={PictureImg}
-                      style={{width:'320px', height:'485px'}}
-        ></PictureImage>
-        <SmallShadowBox>
-        <input 
-         type="text"
-         name="memoryName"
-         maxLength="30"
-         size="40"
-         placeholder="추억을 상세하게 기록해보세요!"
-         style={{ marginLeft: '10px',marginTop:'10px', border:'none',background:'transparent',outline:'none',fontSize:'15px'}}
-        />
         </SmallShadowBox>
-        </WhiteContainer>
-          <RedButton>
-            일기 저장 
-          </RedButton>
-     </Background>
-  )
+      </WhiteContainer>
+      <RedButton>일기 저장</RedButton>
+    </Background>
+  );
 }
 
-export default MaindiaryTest
+export default MaindiaryTest;
