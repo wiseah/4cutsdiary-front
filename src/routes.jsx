@@ -45,22 +45,22 @@ const routes = [
     },
 
     {
-        path: '/maindiarycheck',
+        path: '/maindiarycheck/:diaryId',
         element : <MaindiaryCheck />,
         name: '메인페이지_일기확인'
     },
 
     {
-        path: '/album',
+        path: '/album/:albumId',
         element: <Album/>,
         name: '앨범내부'
     },
 
-    {
-        path: '/album/1',
-        element: <Album/>,
-        name: '앨범내부1'
-    },
+    // {
+    //     path: '/album/:id',
+    //     element: <Album/>,
+    //     name: '앨범내부1'
+    // },
 
     {
         path: '/finduser',

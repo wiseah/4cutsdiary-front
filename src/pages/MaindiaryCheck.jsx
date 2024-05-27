@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PictureImg from '../images/PictureImg.png';
 import { IoIosArrowBack } from "react-icons/io";
+import { useNavigate, useParams } from 'react-router-dom';
+import getDiaryContents from '../APIs/get/getDiaryContents';
 
 const Background = styled.div`
   background: linear-gradient(
@@ -43,14 +45,19 @@ const BackIcon = styled(IoIosArrowBack)`
   color: #D62C4D;
   margin-right: 190px;
   font-size: 24px;
+  cursor: pointer;
 `;
 
 const MainText = styled.div`
-  text-align: center;
+  /* text-align: center; */
   margin-right: 10px;
   color: #D62C4D;
   font-size: 30px;
   font-weight: 600;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Text = styled.div`
@@ -79,8 +86,9 @@ const TextContainer = styled.div`
   margin-top:10px;
   border-radius: 10px;
   display: flex;
+  justify-content: center;
   align-items: center;
-  text-align: center;
+  /* text-align: center; */
 `;
 
 const TimeContainer = styled.div`
@@ -94,6 +102,8 @@ const TimeContainer = styled.div`
   border-style: solid;
   border-color:#D62C4D;
   display: flex;
+  display: flex;
+  justify-content: center;
   align-items: center;
 `;
 
@@ -139,6 +149,7 @@ const LeftButton = styled.button`
   margin-top: 25px;
   margin-right: 10px;
   border: none;
+  cursor: pointer;
 `;
 
 const RightButton = styled.button`
@@ -155,6 +166,7 @@ const RightButton = styled.button`
   margin-top: 25px;
   margin-left: 10px;
   border: none;
+  cursor: pointer;
 `;
 
 const StyledDiv = styled.div`
@@ -168,35 +180,56 @@ const StyledDiv = styled.div`
   white-space: pre-wrap; /* Preserve whitespace and newlines */
 `;
 
-function MaindiaryCheck({ location, dateTime, memoryDetail }) {
+function MaindiaryCheck() {
+  const navigate = useNavigate();
+  const {diaryId} = useParams();
+  const [content, setContent] = useState({
+    "title" : "로딩중",
+    "content":"로딩중",
+    "location":"로딩중",
+    "image":null,
+    "diaryTime":"2000-01-01%00:00:00"
+  });
+
+  useEffect(() => {
+    const handleDiaryContent = async () => {
+      try {
+        const response = await getDiaryContents(diaryId);
+        setContent(response);
+      } catch {
+        console.error("문제 발생!");
+      }
+    }
+    handleDiaryContent();
+  }, [])
   return (
     <Background>
       <WhiteContainer>
         <Header>
-          <BackIcon />
+          <BackIcon onClick={() => navigate('/main')}/>
           <Text>추억 생성하기</Text>
         </Header>
         <br />
-        <MainText>공주 나간다</MainText>
+        <MainText>{content.title}</MainText>
         <br />
         <SubText>
           추억이 기록된 장소
           <br />
-          <TextContainer>{location}</TextContainer>
+          <TextContainer>{content.location}</TextContainer>
           <br />
           우리의 순간이 기록된 시간
-          <TimeContainer>{dateTime}</TimeContainer>
+          <TimeContainer>{content.diaryTime}</TimeContainer>
           <br />
           우리의 추억
         </SubText>
-        <PictureImage src={PictureImg} />
+        <PictureImage src={`${process.env.REACT_APP_SERVER}${content.image}`} />
         <SmallShadowBox>
-          <StyledDiv>{memoryDetail}</StyledDiv>
+          <StyledDiv>{content.content}</StyledDiv>
         </SmallShadowBox>
       </WhiteContainer>
       <HorizontalImageContainer>
-        <LeftButton>홈</LeftButton>
-        <RightButton>앨범</RightButton>
+        <LeftButton onClick={() => navigate('/main')}>홈</LeftButton>
+        <RightButton onClick={() => navigate('/main')}>앨범</RightButton>
       </HorizontalImageContainer>
     </Background>
   );

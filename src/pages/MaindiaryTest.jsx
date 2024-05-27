@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PictureImg from "../images/PictureImg.png";
 import { IoIosArrowBack } from "react-icons/io";
+import createDiary from "../APIs/post/createDiary.js"
+import { useNavigate } from "react-router-dom";
 
 const Background = styled.div`
   background: linear-gradient(
@@ -131,12 +133,35 @@ const RedButton = styled.button`
 
 function MaindiaryTest() {
   const [uploadImage, setUploadImage] = useState();
+  const [title, setTitle] = useState("");
+  const [location, setLocation] = useState("");
+  const [diaryTime, setDiaryTime] = useState("");
+  const [content, setContent] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    var image = sessionStorage.getItem('image');
+    const image = sessionStorage.getItem("image");
     setUploadImage(image);
-    sessionStorage.removeItem('image');
+    sessionStorage.removeItem("image");
   }, []);
+
+  const handleStorageClick = async () => {
+    const albumId = sessionStorage.getItem('albumId')
+    console.log(albumId);
+    try {
+      // const image = new Image();
+      // image.src = uploadImage
+      const imageResponse = await fetch(uploadImage);
+      const blob = await imageResponse.blob();
+      const imagefile = new File([blob], 'uploadimage.png', {type: blob.type})
+      console.log(imagefile)
+      const response = await createDiary(albumId, title, content, location, imagefile, diaryTime);
+      console.log("다이어리 생성 성공:", response);
+      navigate(`/maindiarycheck/${response.diaryId}`)
+    } catch (error) {
+      console.log("다이어리 생성 실패:", error);
+    }
+  };
 
   return (
     <Background>
@@ -157,6 +182,8 @@ function MaindiaryTest() {
               maxLength="30"
               size="40"
               placeholder="추억 이름을 작성해주세요"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               style={{
                 marginLeft: "30px",
                 marginTop: "14px",
@@ -177,6 +204,8 @@ function MaindiaryTest() {
               maxLength="30"
               size="40"
               placeholder="장소 명을 기록해주세요"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
               style={{
                 marginLeft: "30px",
                 marginTop: "14px",
@@ -198,6 +227,8 @@ function MaindiaryTest() {
                   name="memoryName"
                   maxLength="30"
                   size="40"
+                  value={diaryTime}
+                  onChange={(e) => setDiaryTime(e.target.value)}
                   style={{
                     marginLeft: "20px",
                     marginTop: "14px",
@@ -224,6 +255,8 @@ function MaindiaryTest() {
             maxLength="30"
             size="40"
             placeholder="추억을 상세하게 기록해보세요!"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
             style={{
               marginLeft: "10px",
               marginTop: "10px",
@@ -235,7 +268,7 @@ function MaindiaryTest() {
           />
         </SmallShadowBox>
       </WhiteContainer>
-      <RedButton>일기 저장</RedButton>
+      <RedButton onClick={handleStorageClick}>일기 저장</RedButton>
     </Background>
   );
 }
