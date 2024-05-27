@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import TextInput from '../components/TextInput';
 import { BsPerson } from "react-icons/bs";
+import join from '../APIs/post/join';
 
 const Background = styled.div`
   background-color: #FCE6F1;
@@ -60,21 +61,28 @@ function Join() {
   const [nickname, setNickname] = useState('');
   const navigate = useNavigate();
 
-  const handleJoinClick = () => {
-    // 로컬스토리지에서 기존 데이터를 가져옴
-    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+  const handleJoinClick = async () => {
+    // // 로컬스토리지에서 기존 데이터를 가져옴
+    // const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
 
-    // 새로운 유저 객체를 만듦
-    const newUser = { id, password, nickname };
+    // // 새로운 유저 객체를 만듦
+    // const newUser = { id, password, nickname };
 
-    // 새로운 유저 객체를 기존 데이터에 추가
-    existingUsers.push(newUser);
+    // // 새로운 유저 객체를 기존 데이터에 추가
+    // existingUsers.push(newUser);
 
-    // 업데이트된 배열을 로컬스토리지에 저장
-    localStorage.setItem('users', JSON.stringify(existingUsers));
+    // // 업데이트된 배열을 로컬스토리지에 저장
+    // localStorage.setItem('users', JSON.stringify(existingUsers));
 
-    alert('회원가입이 완료되었습니다!');
-    navigate('/intro');
+    try{
+      const response = await join(id, password, nickname)
+      console.log(response)
+      // alert('회원가입이 완료되었습니다!');
+      navigate('/');
+    } catch {
+      alert('회원가입에 실패했습니다.')
+    }
+    
   };
 
   return (

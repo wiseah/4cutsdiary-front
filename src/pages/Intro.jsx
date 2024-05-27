@@ -5,6 +5,9 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import TextInput from '../components/TextInput';
 import PasswordEyeButton from '../components/PasswordEyeButton.jsx';
 import InputErrorText from '../components/InputErrorText.jsx';
+import login from '../APIs/post/login.js';
+import Cookies from 'js-cookie';
+import getUserInfo from '../APIs/get/getUserInfo.js';
 
 const Background = styled.div`
   background: linear-gradient(
@@ -127,18 +130,23 @@ function Intro() {
   const [errorText, setErrorText] = useState('');
   const [fieldHidden, setFieldHidden] = useState(true);
 
-  const handleLoginClick = () => {
-    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
-    const user = existingUsers.find(user => user.id === id && user.password === password);
+  const handleLoginClick = async () => {
+    try{
+      const response = await login(id,password)
+      const accessToken = response.accessToken
+      const refreshToken = response.refreshToken
+      Cookies.set('accessToken', `Bearer ${accessToken}`, { expires: 7 }); 
+      const userInfo = await getUserInfo();
+      sessionStorage.setItem("userName", userInfo.userName);
+      navigate('/main')
 
-    if (user) {
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      navigate('/test');
-      // navigate('/main');
-    } else {
-      setErrorText('아이디 또는 비밀번호가 잘못되었습니다.');
-      alert('로그인에 실패했습니다.');
+      // console.log(response);
+      // console.log(Cookies.get('accessToken')); 
+    } catch {
+        setErrorText('아이디 또는 비밀번호가 잘못되었습니다.');
+        alert('로그인에 실패했습니다.');
     }
+    
   };
 
   return (
