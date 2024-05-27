@@ -83,6 +83,7 @@ function Main() {
         console.log("앨범 데이터:", albumData); // 응답 데이터를 콘솔에 출력
         setAlbums(albumData.albums);
         setDiaries(albumData.diaries);
+        sessionStorage.setItem("rootAlbumId", albumData.albumId)
       } catch (error) {
         console.log("앨범 정보를 가져오는 데 실패했습니다:", error);
       }
@@ -109,7 +110,7 @@ function Main() {
       </TitleContainer>
       <MainContainer>
         {albums.map(album => (
-          <AlbumForm key={album.albumId} name={album.albumName} onClick={() => handleClick(album.id)} />
+          <AlbumForm key={album.albumId} name={album.albumName} $onClick={() => handleClick(album.albumId)} />
         ))}
         {diaries.map(diary => (
           <DiaryForm key={diary.id} name={diary.title} onClick={() => handleClickDiary(diary.id)} />

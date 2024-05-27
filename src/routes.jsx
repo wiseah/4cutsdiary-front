@@ -51,16 +51,16 @@ const routes = [
     },
 
     {
-        path: '/album',
+        path: '/album/:albumId',
         element: <Album/>,
         name: '앨범내부'
     },
 
-    {
-        path: '/album/1',
-        element: <Album/>,
-        name: '앨범내부1'
-    },
+    // {
+    //     path: '/album/:id',
+    //     element: <Album/>,
+    //     name: '앨범내부1'
+    // },
 
     {
         path: '/finduser',

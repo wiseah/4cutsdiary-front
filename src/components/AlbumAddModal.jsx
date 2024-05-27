@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import AlbumImg from '../images/AlbumImg.png';
+import createAlbum from '../APIs/post/createAlbum';
+import { useNavigate } from 'react-router-dom';
 
 const ModalBackground = styled.div`
   width: 324px;
@@ -81,12 +83,19 @@ const ConfirmButton = styled.div`
 
 function AlbumAddModal({ isAlbumModalOpen, closeAlbumModal, addAlbum }) {
   const [albumName, setAlbumName] = useState('');
+  const navigate = useNavigate();
 
-  const handleAddAlbum = () => {
-    if (albumName.trim()) {
-      addAlbum(albumName);
-      setAlbumName('');
-      closeAlbumModal(); // 모달 닫기
+  const handleAddAlbum = async () => {
+    // if (albumName.trim()) {
+    //   addAlbum(albumName);
+    //   setAlbumName('');
+    //   closeAlbumModal(); // 모달 닫기
+    // }
+    try {
+      const newAlbumId = await createAlbum(sessionStorage.getItem("rootAlbumId"), albumName);
+      navigate(`/album/${newAlbumId}`)
+    } catch {
+      console.error("문제 발생")
     }
   };
 

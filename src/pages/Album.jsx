@@ -4,6 +4,8 @@ import AddImg from '../images/AddImg.png';
 import Modal from "../components/InternalModal";
 import AlbumForm from '../components/AlbumForm';
 import { useNavigate, useParams } from 'react-router-dom';
+import DiaryForm from '../components/DiaryForm';
+import getInnerAlbum from '../APIs/get/getInnerAlbum';
 
 const Background = styled.div`
   background: linear-gradient(
@@ -66,60 +68,49 @@ const SubText = styled.div`
 
 function Album() {
   const [showModal, setShowModal] = useState(false);
-  const [items, setItems] = useState([
-    { type: 'diary', name: '공주 1', id: 1 },
-    { type: 'diary', name: '공주 2', id: 2 },
-    { type: 'diary', name: '공주 3', id: 3 },
-    { type: 'diary', name: '곱등이와 인생네컷', id: 4 },
-    { type: 'diary', name: '디자인 너무 힘드러', id: 5 }
-  ]);
+  const [diaries, setDiaries] = useState([]);
+  const [albumName, setAlbumName] = useState("");
 
   const navigate = useNavigate();
   const { albumId } = useParams();
 
-  // 앨범명과 일치하는 앨범을 찾습니다.
-  const album = items.find(item => item.type === 'album' && item.id === parseInt(albumId));
-  // const [nickname, setNickname] = useState('');
-
-  // useEffect(() => {
-  //   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  //   if (currentUser) {
-  //     setNickname(currentUser.nickname);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const fetchAlbumInfo = async () => {
+      try {
+        const albumData = await getInnerAlbum(albumId);
+        console.log("앨범 데이터:", albumData);
+        setDiaries(albumData.diaries);
+        setAlbumName(albumData.albumName);
+      } catch (error) {
+        console.log("앨범 정보를 가져오는 데 실패했습니다:", error);
+      }
+    };
+    fetchAlbumInfo();
+  }, []);
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
 
-  const addDiary = (name) => {
-    const newId = items.length ? items[items.length - 1].id + 1 : 1;
-    setItems([...items, { type: 'diary', name, id: newId }]);
-    closeModal();
-  };
+  const handleClickDiary = (id) => {
+    navigate(`/maindiarycheck/${id}`);
+  }; 
 
-  const handleClick = (type, id) => {
-    if (type === 'album') {
-      navigate(`/album/${id}`);
-    } else if (type === 'diary') {
-      navigate(`/maindiarycheck/${id}`);
-    }
-  };
 
   return (
     <Background>
       <TitleContainer>
-        <BoxTitle>{album ? album.name : '앨범'}</BoxTitle>
+        <BoxTitle>{`${albumName} 앨범`}</BoxTitle>
       </TitleContainer>
       <MainContainer>
-        {items.map((item, index) => (
-          <AlbumForm key={index} type={item.type} name={item.name} index={item.id} onClick={handleClick} />
+        {diaries.map(diary => (
+          <DiaryForm key={diary.id} name={diary.title} onClick={() => handleClickDiary(diary.id)} />
         ))}
         <AddButtonContainer onClick={openModal}>
           <AddButton src={AddImg} />
           <SubText>추가하기</SubText>
         </AddButtonContainer>
       </MainContainer>
-      <Modal isOpen={showModal} closeModal={closeModal} addDiary={addDiary} />
+      <Modal isOpen={showModal} closeModal={closeModal} />
     </Background>
   );
 }
