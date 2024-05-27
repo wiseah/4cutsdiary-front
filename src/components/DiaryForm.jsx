@@ -33,11 +33,12 @@ const DiaryName = styled.div`
   font-weight: 600;
 `;
 
-const AlbumForm = ({ name, index, onClick }) => (
-  <AlbumformContainer onClick={() => onClick(index)}>
-    <AlbumIcon src={AlbumImg} />
-    <AlbumName>{name}</AlbumName>
+
+const DiaryForm = ({ name, onClick }) => (
+  <AlbumformContainer onClick={() => onClick()}>
+    <DiaryIcon src={DiaryImg} />
+    <DiaryName>{name}</DiaryName>
   </AlbumformContainer>
 );
 
-export default AlbumForm;
+export default DiaryForm;
