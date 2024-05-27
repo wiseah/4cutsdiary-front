@@ -45,7 +45,7 @@ const routes = [
     },
 
     {
-        path: '/maindiarycheck',
+        path: '/maindiarycheck/:diaryId',
         element : <MaindiaryCheck />,
         name: '메인페이지_일기확인'
     },

@@ -5,7 +5,7 @@ import GalleryImg from "../images/GalleryImg.png";
 import ScanImg from "../images/ScanImg.png";
 import AlbumImg from '../images/AlbumImg.png';
 import AlbumAddModal from './AlbumAddModal';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const ModalContainer = styled.div`
   width: 324px;
@@ -111,6 +111,7 @@ const CancelButton = styled.div`
 function Add({ isOpen, closeModal, addAlbum }) {
   const navigate = useNavigate();
   const [showAlbumAddModal, setShowAlbumAddModal] = useState(false);
+  const {albumId} = useParams();
 
   const openAlbumAddModal = () => setShowAlbumAddModal(true);
   const closeAlbumAddModal = () => setShowAlbumAddModal(false);

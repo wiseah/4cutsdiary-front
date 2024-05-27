@@ -81,6 +81,7 @@ function Album() {
         console.log("앨범 데이터:", albumData);
         setDiaries(albumData.diaries);
         setAlbumName(albumData.albumName);
+        sessionStorage.setItem('albumId', albumData.albumId);
       } catch (error) {
         console.log("앨범 정보를 가져오는 데 실패했습니다:", error);
       }
