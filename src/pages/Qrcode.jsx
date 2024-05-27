@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useZxing } from "react-zxing";
 import styled from "styled-components";
+import getScan from "../APIs/get/getScan";
 
 const Header = styled.div`
   background-color: #3B3B3B;
@@ -53,15 +54,37 @@ const Button =styled.button`
 `
 
 const QRCodeScanner = () => {  
-  const [result, setResult] = useState("");
+  const [result, setResult] = useState();
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    if (result == null)
+      return;
+
+    const getImage = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_SERVER}/4cutimage?url=${result}`)
+        if (response.ok) {
+          const blob = await response.blob();
+          const url = URL.createObjectURL(blob);
+          sessionStorage.setItem("image",url);
+          navigate('/maindiarytest');
+        }
+        
+      } catch {
+        console.error("오류 발생")
+      }
+    }
+    getImage();
+  }, [result])
+
+  
+
   const { ref } = useZxing({
-    onDecodeResult(result) {
-      setResult(result.getText());
+    onDecodeResult(qrInfo) {
+      setResult(qrInfo.getText());
     },
   });
-
-  const navigate = useNavigate();
-
   return (
     <>
       <Header>
