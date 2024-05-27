@@ -33,8 +33,8 @@ const Text = styled.div`
 const SubText = styled.div`
   text-align: center;
   color: #4D3338;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   margin-top: 25px;
 `;
 

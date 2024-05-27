@@ -43,6 +43,7 @@ const InputAlbumName = styled.input`
   border: 5px solid #f48b9f;
   margin-bottom: 10px;
   cursor: pointer;
+  padding-left: 10px;
 `;
 
 const ButtonContainer = styled.div`
