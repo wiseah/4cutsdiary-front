@@ -4,6 +4,7 @@ import PictureImg from "../images/PictureImg.png";
 import { IoIosArrowBack } from "react-icons/io";
 import createDiary from "../APIs/post/createDiary.js"
 import { useNavigate } from "react-router-dom";
+import MaindiaryModalForUpload from "./MaindiaryModalForUpload";
 
 const Background = styled.div`
   background: linear-gradient(
@@ -73,6 +74,7 @@ const TextContainer = styled.div`
   border-radius: 10px 10px 10px 10px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 `;
 
@@ -88,6 +90,7 @@ const TimeContainer = styled.div`
   border-color:#D62C4D;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 `;
 
@@ -129,6 +132,27 @@ const RedButton = styled.button`
   margin-top: 20px;
   margin-left: 45px;
   border: none;
+  cursor: pointer;
+`;
+
+const Input = styled.input`
+  /* margin-left: ${(props) => props.marginLeft || '30px'};
+  margin-top: 14px; */
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 15px;
+  width: calc(100% - ${(props) => props.widthOffset || '60px'});
+`;
+
+const TextArea = styled.textarea`
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  font-size: 15px;
+  background: transparent;
 `;
 
 function MaindiaryTest() {
@@ -137,6 +161,7 @@ function MaindiaryTest() {
   const [location, setLocation] = useState("");
   const [diaryTime, setDiaryTime] = useState("");
   const [content, setContent] = useState("");
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -146,6 +171,7 @@ function MaindiaryTest() {
   }, []);
 
   const handleStorageClick = async () => {
+    setShowModal(true);
     const albumId = sessionStorage.getItem('albumId')
     console.log(albumId);
     try {
@@ -160,6 +186,8 @@ function MaindiaryTest() {
       navigate(`/maindiarycheck/${response.diaryId}`)
     } catch (error) {
       console.log("다이어리 생성 실패:", error);
+    } finally {
+      setShowModal(false);
     }
   };
 
@@ -176,70 +204,35 @@ function MaindiaryTest() {
           우리의 추억 이름은?
           <br />
           <TextContainer>
-            <input
+            <Input
               type="text"
-              name="memoryName"
               maxLength="30"
-              size="40"
               placeholder="추억 이름을 작성해주세요"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              style={{
-                marginLeft: "30px",
-                marginTop: "14px",
-                border: "none",
-                background: "transparent",
-                outline: "none",
-                fontSize: "15px",
-              }}
             />
           </TextContainer>
           <br />
           추억이 기록된 장소
           <br />
           <TextContainer>
-            <input
+            <Input
               type="text"
-              name="memoryName"
               maxLength="30"
-              size="40"
               placeholder="장소 명을 기록해주세요"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              style={{
-                marginLeft: "30px",
-                marginTop: "14px",
-                border: "none",
-                background: "transparent",
-                outline: "none",
-                fontSize: "15px",
-              }}
             />
           </TextContainer>
           <br />
           우리의 순간이 기록된 시간
           <TimeContainer>
-            <form>
-              <label>
-                <input
-                  type="datetime-local"
-                  placeholder="2024-05-21T21:30"
-                  name="memoryName"
-                  maxLength="30"
-                  size="40"
-                  value={diaryTime}
-                  onChange={(e) => setDiaryTime(e.target.value)}
-                  style={{
-                    marginLeft: "20px",
-                    marginTop: "14px",
-                    border: "none",
-                    background: "transparent",
-                    outline: "none",
-                    fontSize: "15px",
-                  }}
-                />
-              </label>
-            </form>
+              <Input
+                type="datetime-local"
+                placeholder="2024-05-21T21:30"
+                value={diaryTime}
+                onChange={(e) => setDiaryTime(e.target.value)}
+              />
           </TimeContainer>
           <br />
           일기 쓰기
@@ -249,26 +242,15 @@ function MaindiaryTest() {
           style={{ width: "320px", height: "485px" }}
         ></PictureImage>
         <SmallShadowBox>
-          <input
-            type="text"
-            name="memoryName"
-            maxLength="30"
-            size="40"
+          <TextArea
             placeholder="추억을 상세하게 기록해보세요!"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            style={{
-              marginLeft: "10px",
-              marginTop: "10px",
-              border: "none",
-              background: "transparent",
-              outline: "none",
-              fontSize: "15px",
-            }}
           />
         </SmallShadowBox>
       </WhiteContainer>
       <RedButton onClick={handleStorageClick}>일기 저장</RedButton>
+      <MaindiaryModalForUpload show={showModal}/>
     </Background>
   );
 }

@@ -1,6 +1,6 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import styled from 'styled-components';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import TextInput from '../components/TextInput';
 import PasswordEyeButton from '../components/PasswordEyeButton.jsx';
@@ -130,18 +130,25 @@ function Intro() {
   const [errorText, setErrorText] = useState('');
   const [fieldHidden, setFieldHidden] = useState(true);
 
+  useEffect(()=> {
+    const isLoggedIn = Cookies.get("accessToken")
+    if (!isLoggedIn) {
+      return;
+    }
+
+    navigate("/main");
+  }, [])
+
   const handleLoginClick = async () => {
     try{
-      const response = await login(id,password)
-      const accessToken = response.accessToken
-      const refreshToken = response.refreshToken
-      Cookies.set('accessToken', `Bearer ${accessToken}`, { expires: 7 }); 
+      const response = await login(id,password);
+      const accessToken = response.accessToken;
+      const refreshToken = response.refreshToken;
+      Cookies.set('accessToken', `Coffee ${accessToken}`, { expires: 7 }); 
+      Cookies.set('refreshToken', `Coffee ${refreshToken}`, { expires: 7 });
       const userInfo = await getUserInfo();
       sessionStorage.setItem("userName", userInfo.userName);
-      navigate('/main')
-
-      // console.log(response);
-      // console.log(Cookies.get('accessToken')); 
+      navigate('/main');
     } catch {
         setErrorText('아이디 또는 비밀번호가 잘못되었습니다.');
         alert('로그인에 실패했습니다.');
