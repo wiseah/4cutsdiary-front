@@ -14,7 +14,9 @@ const Background = styled.div`
     #FCE6F1 45%,
     #FF9CAF 100%
   );
-  height: 600px;
+  /* height: 600px; */
+  /* height: 100%; */
+  min-height: calc(100vh - (190px + 72px));
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,6 +29,7 @@ const MainContainer = styled.div`
   padding: 24px 0px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 20px;
 `;
 
 const TitleContainer = styled.div`

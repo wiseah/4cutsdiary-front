@@ -17,11 +17,11 @@ const Content=styled.div`
     max-width:390px;
     min-height:100vh;
 
-    overflow:auto;
+    /* overflow:auto; */
     box-shadow:0px 0px 32px #0000002f;
     background-color: #ffffff;
 
-    padding-bottom: 152px; //footer높이만큼 패딩 줘야함. 그래야 내용 다보임. (근데 160으로 하니까 흰부분 생겨서 152px로 고정함.)
+    /* padding-bottom: 152px; //footer높이만큼 패딩 줘야함. 그래야 내용 다보임. (근데 160으로 하니까 흰부분 생겨서 152px로 고정함.) */
 `;
 
 // 01.home Header
@@ -80,16 +80,17 @@ const SuportImageListButton = styled.button`
 `;
 
 const Footer = styled.div`
-    position: fixed;
-    max-width: 390px;
-    min-width: 360px;
+    /* position: fixed; */
+    /* max-width: 390px;
+    min-width: 360px; */
     width: 100%;
     height: 160px;
-    bottom: 0;
-    left: 50%;
+    /* bottom: 0; */
+    /* left: 50%; */
     
+    padding-top: 30px;
     gap: 16px;
-    transform: translateX(-50%);
+    /* transform: translateX(-50%); */
     background-color: #4D3338;
 
     font-weight: 400;
@@ -100,7 +101,7 @@ const ServiceName = styled.div`
 color: #ffffff;
 font-size: 40px;
 font-weight: 500;
-margin-top: 16px;
+/* margin-top: 16px; */
 text-align: center;
 `;
 const Member = styled.div`
@@ -155,32 +156,32 @@ const Mobile=()=>{
                             </SuportImageListButton>
                         </TitleButtons>
                     </Header>
-                    <Outlet /> 
+                    <Outlet />
+                    <Footer>
+                        <ServiceName>
+                            네컷일기
+                        </ServiceName>
+                        <Member>
+                            <Leader>
+                                총괄/백엔드 팀장: 이수혁
+                                <br />
+                                프론트엔드 팀장: 김현아
+                            </Leader>
+                            <Follower>
+                                백엔드: 고선민, 류동현
+                                <br />
+                                프론트: 김규린, 조윤해
+                            </Follower>
+                        </Member>
+                        <Team>
+                            <TeamText>
+                            <BiCopyright size="14px" style={{ marginRight: '2px', color: '#FFFFFF', marginBottom: '1px'}}/>
+                                한국외국어대학교 멋쟁이사자처럼 미니프로젝트 2팀 
+                            </TeamText>
+                            
+                        </Team>
+                    </Footer> 
                 </Content>
-                <Footer>
-                    <ServiceName>
-                        네컷일기
-                    </ServiceName>
-                    <Member>
-                        <Leader>
-                            총괄/백엔드 팀장: 이수혁
-                            <br />
-                            프론트엔드 팀장: 김현아
-                        </Leader>
-                        <Follower>
-                            백엔드: 고선민, 류동현
-                            <br />
-                            프론트: 김규린, 조윤해
-                        </Follower>
-                    </Member>
-                    <Team>
-                        <TeamText>
-                           <BiCopyright size="14px" style={{ marginRight: '2px', color: '#FFFFFF', marginBottom: '1px'}}/>
-                            한국외국어대학교 멋쟁이사자처럼 미니프로젝트 2팀 
-                        </TeamText>
-                        
-                    </Team>
-                </Footer>
             </Container>
         </>
     )

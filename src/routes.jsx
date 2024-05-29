@@ -67,16 +67,16 @@ const routes = [
         element: <FindUser />,
         name: '아이디/비밀번호 찾기 페이지'
     },
-    {
-        path: '/scan',
-        element: <QRCodeScanner />,
-        name: 'qr스캔'
-    },
-    {
-        path: '/scan2',
-        element: <Reader />,
-        name: 'qr스캔2'
-    },
+    // {
+    //     path: '/scan',
+    //     element: <QRCodeScanner />,
+    //     name: 'qr스캔'
+    // },
+    // {
+    //     path: '/scan2',
+    //     element: <Reader />,
+    //     name: 'qr스캔2'
+    // },
 
     {
         path: '/test',

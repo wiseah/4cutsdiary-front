@@ -10,7 +10,8 @@ const Background = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
+  min-height: calc(100vh - (190px + 72px));
 `;
 const Text = styled.div`
   color: #D62C4D;

@@ -14,7 +14,8 @@ const Background = styled.div`
     #FCE6F1 45%,
     #FF9CAF 100%
   );
-  height: 560px;
+  /* height: 560px; */
+  min-height: calc(100vh - (190px + 72px));
   display: flex;
   flex-direction: column;
   align-items: center;
