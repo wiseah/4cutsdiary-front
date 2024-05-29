@@ -1,8 +1,10 @@
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import classNames from 'classnames';
 import { BsCameraFill } from "react-icons/bs";
 import { BiCopyright } from "react-icons/bi";
+import Cookies from 'js-cookie';
+import { useEffect, useState } from 'react';
 
 const Container=styled.div`
     display:flex;
@@ -69,6 +71,7 @@ const IntroButton = styled.button`
     font-weight: 400;
     font-size: 14px;
     font-family: Inter;
+    cursor: pointer;
 `;
 const SuportImageListButton = styled.button`
     background: none;
@@ -135,7 +138,21 @@ const TeamText = styled.div`
 `;
 
 const Mobile=()=>{
-    const navigate=useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const location = useLocation();
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        const token = Cookies.get("accessToken");
+        setIsLoggedIn(!!token);
+    }, [location]);
+
+    const handleLogOut = () => {
+        Cookies.remove("accessToken");
+        Cookies.remove("refreshToken");
+        setIsLoggedIn(false);
+        navigate("/");
+    }
 
     return(
         <>
@@ -150,10 +167,16 @@ const Mobile=()=>{
                             <IntroButton>
                                 기능소개
                             </IntroButton>
-                            |
-                            <SuportImageListButton>
+                            {
+                                isLoggedIn && (
+                                    <IntroButton onClick={() => handleLogOut()}>
+                                        로그아웃
+                                    </IntroButton>
+                                )
+                            }
+                            {/* <SuportImageListButton>
                                 지원 이미지 목록
-                            </SuportImageListButton>
+                            </SuportImageListButton> */}
                         </TitleButtons>
                     </Header>
                     <Outlet />
