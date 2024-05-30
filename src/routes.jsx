@@ -10,6 +10,7 @@ import Test from "./pages/Test";
 import Reader from "./pages/Reader";
 import QRCodeScanner from "./pages/Qrcode";
 import MaindiaryCheck from "./pages/MaindiaryCheck";
+import IntroFeature from "./pages/IntroFeature";
 
 
 const routes = [
@@ -22,6 +23,13 @@ const routes = [
         element: <Intro />,
         name: '랜딩페이지(첫 페이지)'
     },
+
+    {
+        path: '/feature',
+        element: <IntroFeature />,
+        name: '기능소개'
+    },
+
     {
         path: '/join',
         element: <Join />,
