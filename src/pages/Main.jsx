@@ -72,12 +72,10 @@ function Main() {
   const [showModal, setShowModal] = useState(false);
   const [albums, setAlbums] = useState([]);
   const [diaries, setDiaries] = useState([]);
-
-  const [nickname, setNickname] = useState('');
+  const [albumName, setAlbumName] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {(
-    setNickname(sessionStorage.getItem("userName")));
+  useEffect(() => {
 
     // 초기 앨범 정보를 가져오는 API 호출
     const fetchAlbumInfo = async () => {
@@ -86,6 +84,7 @@ function Main() {
         console.log("앨범 데이터:", albumData); // 응답 데이터를 콘솔에 출력
         setAlbums(albumData.albums);
         setDiaries(albumData.diaries);
+        setAlbumName(albumData.albumName);
         sessionStorage.setItem("rootAlbumId", albumData.albumId)
         sessionStorage.setItem('albumId', albumData.albumId);
       } catch (error) {
@@ -110,7 +109,7 @@ function Main() {
   return (
     <Background>
       <TitleContainer>
-        <BoxTitle>{nickname}의 네컷 일기 모음</BoxTitle>
+        <BoxTitle>{albumName}의 네컷 일기 모음</BoxTitle>
       </TitleContainer>
       <MainContainer>
         {albums.map(album => (
