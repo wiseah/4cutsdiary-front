@@ -28,7 +28,7 @@ const ModalContainer = styled.div`
   text-align: center;
 `;
 
-const MaindiaryModalForUpload = ({ show }) => {
+const MaindiaryModalForUpload = ({ show, children }) => {
   if (!show) {
     return null;
   }
@@ -36,8 +36,7 @@ const MaindiaryModalForUpload = ({ show }) => {
   return (
     <ModalBackground>
       <ModalContainer>
-        <h2>일기를 저장중입니다...</h2>
-        <p>잠기만 기다려주세요</p>
+        {children}
       </ModalContainer>
     </ModalBackground>
   );
