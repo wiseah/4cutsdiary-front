@@ -6,6 +6,7 @@ import AlbumForm from '../components/AlbumForm';
 import { useNavigate, useParams } from 'react-router-dom';
 import DiaryForm from '../components/DiaryForm';
 import getInnerAlbum from '../APIs/get/getInnerAlbum';
+import GoBackForm from '../components/GoBackForm';
 
 const Background = styled.div`
   background: linear-gradient(
@@ -104,6 +105,7 @@ function Album() {
         <BoxTitle>{`${albumName} 앨범`}</BoxTitle>
       </TitleContainer>
       <MainContainer>
+        <GoBackForm/>
         {diaries.map(diary => (
           <DiaryForm key={diary.id} name={diary.title} onClick={() => handleClickDiary(diary.id)} />
         ))}

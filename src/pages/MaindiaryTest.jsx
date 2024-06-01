@@ -162,6 +162,7 @@ function MaindiaryTest() {
   const [diaryTime, setDiaryTime] = useState("");
   const [content, setContent] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [isUploading, setIsUploading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -172,11 +173,10 @@ function MaindiaryTest() {
 
   const handleStorageClick = async () => {
     setShowModal(true);
+    setIsUploading(true);
     const albumId = sessionStorage.getItem('albumId')
     console.log(albumId);
     try {
-      // const image = new Image();
-      // image.src = uploadImage
       const imageResponse = await fetch(uploadImage);
       const blob = await imageResponse.blob();
       const imagefile = new File([blob], 'uploadimage.png', {type: blob.type})
@@ -187,7 +187,10 @@ function MaindiaryTest() {
     } catch (error) {
       console.log("다이어리 생성 실패:", error);
     } finally {
-      setShowModal(false);
+      setIsUploading(false);
+      setTimeout(() => {
+        setShowModal(false);
+      }, 2000);
     }
   };
 
@@ -250,7 +253,21 @@ function MaindiaryTest() {
         </SmallShadowBox>
       </WhiteContainer>
       <RedButton onClick={handleStorageClick}>일기 저장</RedButton>
-      <MaindiaryModalForUpload show={showModal}/>
+      <MaindiaryModalForUpload show={showModal}>
+        {
+          isUploading ?
+          <>
+            <h2>일기를 저장중입니다...</h2>
+            <p>잠시만 기다려주세요</p>
+          </> :
+          <>
+            <h2>오류가 발생했습니다.</h2>
+            <p>잠시 후 다시 시도해주세요</p>
+            <br/>
+            <p>2초 뒤에 창이 닫힙니다...</p>
+          </>
+        }
+      </MaindiaryModalForUpload>
     </Background>
   );
 }
