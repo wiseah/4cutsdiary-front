@@ -1,3 +1,32 @@
+# 🦁한국외국어대학교 멋쟁이사자처럼 미니프로젝트 2팀 프론트엔드 레포지토리🦁
+
+<div align="center">
+  
+![header](https://capsule-render.vercel.app/api?type=waving&height=300&color=0:FCE6F1,50:F48B9F,100:FCE6F1&text=[%20🎀%20네컷일기%20]&desc=2024%20한국외대%20멋쟁이사자처럼%20미니프로젝트%202위%20&descAlignY=56&descAlign=50&fontAlign=51&fontAlignY=40&fontSize=50&fontColor=ffffff)
+
+<b>[ 🎀 내 손안의 인생네컷 일기장: 네컷일기 ] </b><br>
+<b>🏆 2024 한국외대 멋쟁이사자처럼 <미니프로젝트> 2위 수상</b> 🏆<br>
+
+<b>💻 배포 사이트</b> : https://4cutsdiary.klr.kr
+<br>
+
+<img src="https://github.com/hufslion-12th/team2-front/assets/118183190/3e18ee26-5cb8-49d3-be9e-b42da0a572c8" width="60%"/>
+
+
+
+### 🌸 Developers 🌸
+|FE | FE | FE |
+| :---: | :---: | :---: |
+|  <img style="width: 200px;" src="https://github.com/hufslion-12th/team2-front/assets/118183190/8a916879-16c8-4707-80f6-a5fa981bdf5a" />  | <img style="width: 200px;" src="https://github.com/hufslion-12th/team2-front/assets/118183190/40e8c272-9b88-46ba-9144-51c0d5b3dd8a" /> | <img style="width: 200px;" src="https://github.com/hufslion-12th/team2-front/assets/118183190/de41cbc4-14bc-4d05-abcf-9ea5bf997b7b" /> |
+|한국외국어대학교|한국외국어대학교|한국외국어대학교|
+|환경학과 21|융합인재학부 24|GBT학부 19|
+|김현아|김규린|조윤해|
+|   [@wiseah](https://github.com/wiseah)   |  [@grace0404](https://github.com/grace0404)     |   [@yunhaecho](https://github.com/yunhaecho)   |
+
+
+</div>
+
+
 ## 개발 환경 세팅
 
 - Node.js 18+를 설치합니다.
