@@ -10,7 +10,7 @@
 <b>💻 배포 사이트</b> : https://4cutsdiary.klr.kr
 <br>
 
-<img src="https://github.com/hufslion-12th/team2-front/assets/118183190/3e18ee26-5cb8-49d3-be9e-b42da0a572c8" width="60%"/>
+<img src="https://github.com/hufslion-12th/team2-front/assets/118183190/9b5a90fc-2a53-4aa6-9b3c-38801573b70c" width="70%"/>
 
 
 
