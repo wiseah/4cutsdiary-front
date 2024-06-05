@@ -15,7 +15,7 @@
 
 
 ### 🌸 Developers 🌸
-|FE | FE | FE |
+|FE 팀장 | FE | FE |
 | :---: | :---: | :---: |
 |  <img style="width: 200px;" src="https://github.com/hufslion-12th/team2-front/assets/118183190/8a916879-16c8-4707-80f6-a5fa981bdf5a" />  | <img style="width: 200px;" src="https://github.com/hufslion-12th/team2-front/assets/118183190/40e8c272-9b88-46ba-9144-51c0d5b3dd8a" /> | <img style="width: 200px;" src="https://github.com/hufslion-12th/team2-front/assets/118183190/de41cbc4-14bc-4d05-abcf-9ea5bf997b7b" /> |
 |한국외국어대학교|한국외국어대학교|한국외국어대학교|
