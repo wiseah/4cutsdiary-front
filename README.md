@@ -24,7 +24,7 @@
 |   [@wiseah](https://github.com/wiseah)   |  [@grace0404](https://github.com/grace0404)     |   [@yunhaecho](https://github.com/yunhaecho)   |
 
 ### 🛠️ Tech 🛠
-<img src="https://skillicons.dev/icons?i=react,styledcomponents,docker,nginx,aws" alt=""/>
+<img src="https://skillicons.dev/icons?i=react,styledcomponents,spring,mysql,docker,nginx,aws,jenkins" alt=""/>
 <br>
 </div>
 
