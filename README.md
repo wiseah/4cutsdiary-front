@@ -21,7 +21,7 @@
 |한국외국어대학교|한국외국어대학교|한국외국어대학교|
 |환경학과 21|융합인재학부 24|GBT학부 19|
 |김현아|김규린|조윤해|
-|   [@wiseah](https://github.com/wiseah)   |  [@grace0404](https://github.com/grace0404)     |   [@yunhaecho](https://github.com/yunhaecho)   |
+|   [@wiseah](https://github.com/wiseah)   |  [@grace0404](https://github.com/grace0404)     |   [@yuunhae](https://github.com/yuunhae)   |
 
 ### 🛠️ Tech 🛠
 <img src="https://skillicons.dev/icons?i=react,styledcomponents,spring,mysql,docker,nginx,aws,jenkins" alt=""/>
